@@ -1,0 +1,306 @@
+<div class="calculator-container">
+  <div class="calculator-header">
+    <h1>Mortgage Stress Test Calculator Canada</h1>
+  </div>
+
+  <div class="form-container">
+    <div class="calculator-description">
+      <p>The mortgage stress test requires you to qualify at the higher of 5.25% or your contract rate + 2%.</p>
+    </div>
+
+    <form [formGroup]="stressTestForm" class="stress-test-form">
+      <div class="form-fields-row">
+        <!-- Purchase Price -->
+        <div class="form-field-group">
+          <div class="field-header">
+            <label class="field-label">Purchase price</label>
+            <div class="tooltip-container">
+              <button type="button" class="tooltip-icon" 
+                      (click)="$event.stopPropagation(); toggleTooltip('purchase')">
+                ?
+              </button>
+              <div class="tooltip-content" [class.show]="showPurchaseTooltip" 
+                   (click)="$event.stopPropagation()">
+                <div class="tooltip-arrow"></div>
+                <p>The total purchase price of the property you wish to buy.</p>
+              </div>
+            </div>
+          </div>
+          <div class="currency-input-wrapper">
+            <span class="currency-symbol">$</span>
+            <input 
+              type="text" 
+              class="form-input"
+              formControlName="purchasePrice" 
+              (input)="onCurrencyInput($event, 'purchasePrice')"
+              placeholder="0">
+          </div>
+          <div class="slider-wrapper" *ngIf="!isMobile">
+            <input 
+              type="range" 
+              min="100000" 
+              max="2000000" 
+              step="10000"
+              [value]="stressTestForm.get('purchasePrice')?.value"
+              (input)="onSliderChange($event, 'purchasePrice')"
+              class="range-slider">
+            <div class="slider-labels">
+              <span>$100K</span>
+              <span>$2M</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Down Payment -->
+        <div class="form-field-group">
+          <div class="field-header">
+            <label class="field-label">Down payment</label>
+            <div class="tooltip-container">
+              <button type="button" class="tooltip-icon" 
+                      (click)="$event.stopPropagation(); toggleTooltip('downPayment')">
+                ?
+              </button>
+              <div class="tooltip-content" [class.show]="showDownPaymentTooltip" 
+                   (click)="$event.stopPropagation()">
+                <div class="tooltip-arrow"></div>
+                <p>The amount of money you will put down on the property. Enter as a percentage of the purchase price.</p>
+              </div>
+            </div>
+          </div>
+          <div class="percent-input-wrapper">
+            <input 
+              type="text" 
+              class="form-input"
+              formControlName="downPaymentPercent" 
+              (input)="onPercentInput($event, 'downPaymentPercent')"
+              (blur)="onPercentBlur($event, 'downPaymentPercent')"
+              placeholder="5.00">
+            <span class="percent-symbol">%</span>
+          </div>
+          <div class="down-payment-hint" *ngIf="result()">
+            {{ formatCurrency(result()!.downPaymentAmount) }}
+          </div>
+          <div class="slider-wrapper" *ngIf="!isMobile">
+            <input 
+              type="range" 
+              min="0" 
+              max="100" 
+              step="1"
+              [value]="stressTestForm.get('downPaymentPercent')?.value"
+              (input)="onSliderChange($event, 'downPaymentPercent')"
+              class="range-slider">
+            <div class="slider-labels">
+              <span>0%</span>
+              <span>100%</span>
+            </div>
+          </div>
+
+          <div *ngIf="stressTestForm.get('downPaymentPercent')?.errors?.['min']" 
+            class="error-message">
+          Down payment must be at least 5%
+        </div>
+        </div>
+
+        <!-- Amortization -->
+        <div class="form-field-group">
+          <div class="field-header">
+            <label class="field-label">Amortization</label>
+            <div class="tooltip-container">
+              <button type="button" class="tooltip-icon" 
+                      (click)="$event.stopPropagation(); toggleTooltip('amortization')">
+                ?
+              </button>
+              <div class="tooltip-content" [class.show]="showAmortizationTooltip" 
+                   (click)="$event.stopPropagation()">
+                <div class="tooltip-arrow"></div>
+                <p>The length of time it will take to pay off your entire mortgage.</p>
+              </div>
+            </div>
+          </div>
+          <div class="select-wrapper">
+            <select class="form-select" formControlName="amortizationYears">
+              <option *ngFor="let years of amortizationOptions" [value]="years">
+                {{ years }} Years
+              </option>
+            </select>
+            <div class="select-arrow">▼</div>
+          </div>
+        </div>
+
+        <!-- Mortgage Rate -->
+        <div class="form-field-group">
+          <div class="field-header">
+            <label class="field-label">Mortgage rate</label>
+            <div class="tooltip-container">
+              <button type="button" class="tooltip-icon" 
+                      (click)="$event.stopPropagation(); toggleTooltip('rate')">
+                ?
+              </button>
+              <div class="tooltip-content" [class.show]="showRateTooltip" 
+                   (click)="$event.stopPropagation()">
+                <div class="tooltip-arrow"></div>
+                <p>The interest rate on your mortgage contract.</p>
+              </div>
+            </div>
+          </div>
+          <div class="percent-input-wrapper">
+            <input 
+              type="text" 
+              class="form-input"
+              formControlName="contractRateAnnualPct" 
+              (input)="onPercentInput($event, 'contractRateAnnualPct')"
+              placeholder="0.00">
+            <span class="percent-symbol">%</span>
+          </div>
+          <div class="slider-wrapper" *ngIf="!isMobile">
+            <input 
+              type="range" 
+              min="0.1" 
+              max="15" 
+              step="0.1"
+              [value]="stressTestForm.get('contractRateAnnualPct')?.value"
+              (input)="onSliderChange($event, 'contractRateAnnualPct')"
+              class="range-slider">
+            <div class="slider-labels">
+              <span>0.1%</span>
+              <span>15%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Payment Frequency -->
+        <div class="form-field-group">
+          <div class="field-header">
+            <label class="field-label">Payment frequency</label>
+          </div>
+          <div class="select-wrapper">
+            <select class="form-select" formControlName="frequency">
+              <option *ngFor="let freq of frequencies" [value]="freq.value">
+                {{ freq.label }}
+              </option>
+            </select>
+            <div class="select-arrow">▼</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Sliders -->
+      <div class="mobile-sliders" *ngIf="isMobile">
+        <div class="mobile-slider-group" *ngIf="stressTestForm.get('purchasePrice')?.value">
+          <label>Purchase price: {{ formatCurrency(stressTestForm.get('purchasePrice')?.value) }}</label>
+          <input 
+            type="range" 
+            min="100000" 
+            max="2000000" 
+            step="10000"
+            [value]="stressTestForm.get('purchasePrice')?.value"
+            (input)="onSliderChange($event, 'purchasePrice')"
+            class="mobile-range-slider">
+        </div>
+        
+        <div class="mobile-slider-group" *ngIf="stressTestForm.get('downPaymentPercent')?.value">
+          <label>Down payment: {{ stressTestForm.get('downPaymentPercent')?.value }}%</label>
+          <input 
+            type="range" 
+            min="0" 
+            max="100" 
+            step="1"
+            [value]="stressTestForm.get('downPaymentPercent')?.value"
+            (input)="onSliderChange($event, 'downPaymentPercent')"
+            class="mobile-range-slider">
+        </div>
+        
+        <div class="mobile-slider-group" *ngIf="stressTestForm.get('contractRateAnnualPct')?.value">
+          <label>Mortgage rate: {{ stressTestForm.get('contractRateAnnualPct')?.value }}%</label>
+          <input 
+            type="range" 
+            min="0.1" 
+            max="15" 
+            step="0.1"
+            [value]="stressTestForm.get('contractRateAnnualPct')?.value"
+            (input)="onSliderChange($event, 'contractRateAnnualPct')"
+            class="mobile-range-slider">
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button 
+          type="button" 
+          class="calculate-button"
+          [disabled]="stressTestForm.invalid">
+          Calculate Stress Test
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Results Section -->
+  <div *ngIf="result()" class="results-section">
+    <div class="results-header">
+      <h2>Stress Test Results</h2>
+    </div>
+
+    <div class="results-grid">
+      <div class="result-card">
+        <div class="result-label">Mortgage amount</div>
+        <div class="result-value">{{ formatCurrency(result()!.principal) }}</div>
+      </div>
+      
+      <div class="result-card">
+        <div class="result-label">Stress test rate</div>
+        <div class="result-value">{{ result()!.stressTestRateAnnualPct | number:'1.2-2' }}%</div>
+      </div>
+      
+      <div class="result-card">
+  <div class="result-label">Qualifying payment</div>
+  <div class="result-value">{{ formatCurrencyRounded(result()!.paymentQualifying) }}</div>
+  <div class="result-subtext">per payment</div>
+</div>
+      
+      <div class="result-card">
+  <div class="result-label">Contract payment</div>
+  <div class="result-value">{{ formatCurrencyRounded(result()!.paymentContract) }}</div>
+  <div class="result-subtext">per payment</div>
+</div>
+    </div>
+
+    <div class="payment-comparison">
+      <h3>Payment Comparison</h3>
+      <div class="comparison-table">
+        <div class="comparison-row header">
+          <div class="comparison-cell">Frequency</div>
+          <div class="comparison-cell">At contract rate ({{ stressTestForm.get('contractRateAnnualPct')?.value | number:'1.2-2' }}%)</div>
+          <div class="comparison-cell">At stress test rate ({{ result()!.stressTestRateAnnualPct | number:'1.2-2' }}%)</div>
+          <div class="comparison-cell">Difference</div>
+        </div>
+        
+        <div class="comparison-row">
+  <div class="comparison-cell">Per payment</div>
+  <div class="comparison-cell">{{ formatCurrencyRounded(result()!.paymentContract) }}</div>
+  <div class="comparison-cell">{{ formatCurrencyRounded(result()!.paymentQualifying) }}</div>
+  <div class="comparison-cell difference">
+    {{ formatCurrencyRounded(result()!.paymentQualifying - result()!.paymentContract) }}
+  </div>
+</div>
+        
+        <div class="comparison-row">
+  <div class="comparison-cell">Monthly</div>
+  <div class="comparison-cell">{{ formatCurrencyRounded(result()!.monthlyPaymentContract) }}</div>
+  <div class="comparison-cell">{{ formatCurrencyRounded(result()!.monthlyPaymentQualifying) }}</div>
+  <div class="comparison-cell difference">
+    {{ formatCurrencyRounded(result()!.monthlyPaymentQualifying - result()!.monthlyPaymentContract) }}
+  </div>
+</div>
+        
+        <div class="comparison-row">
+  <div class="comparison-cell">Annual</div>
+  <div class="comparison-cell">{{ formatCurrencyRounded(result()!.annualPaymentContract) }}</div>
+  <div class="comparison-cell">{{ formatCurrencyRounded(result()!.annualPaymentQualifying) }}</div>
+  <div class="comparison-cell difference">
+    {{ formatCurrencyRounded(result()!.annualPaymentQualifying - result()!.annualPaymentContract) }}
+  </div>
+</div>
+      </div>
+    </div>
+  </div>
+</div>

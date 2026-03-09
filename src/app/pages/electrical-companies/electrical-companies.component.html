@@ -1,0 +1,129 @@
+<!-- Hero Banner Section -->
+<section class="hero-banner">
+  <img src="electrical_companies.png" 
+       alt="Calgary Electrical Companies" 
+       class="hero-banner-image">
+  <div class="hero-banner-overlay">
+    <div class="hero-banner-content container">
+      <h1 class="hero-banner-title">Electrical Companies</h1>
+      <div class="hero-banner-subtitle">Trusted electricians for homeowners & real estate investors</div>
+    </div>
+  </div>
+</section>
+
+<!-- Intro Section -->
+<section class="intro-section">
+  <div class="container">
+    <h1>Top 3 Electrical Companies in Calgary</h1>
+    <h2>Trusted Electricians for Homeowners & Real Estate Investors</h2>
+    <p>Choosing the right electrical company in Calgary is about far more than small repairs. Electrical work directly affects safety, insurance eligibility, inspection outcomes, and long-term property value. Poor electrical workmanship can result in failed inspections, denied insurance claims, forced upgrades, or serious fire and shock hazards.</p>
+    <p>We highlight reputable Calgary electrical companies known for licensed workmanship, Alberta Electrical Code compliance, reliability, and clear communication. These companies are trusted by homeowners, landlords, and investors for renovations, upgrades, repairs, and rental-property compliance.</p>
+  </div>
+</section>
+
+<!-- Important Note Section -->
+<section class="ready-section">
+  <div class="container">
+    <div class="important-note">
+      <strong>Important:</strong>
+      <p>Our rankings are 100% independent, based on research, professional evaluation, and client feedback.</p>
+      <p>We do not receive commissions, referral fees, or compensation from any company listed here.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Top Electrical Companies Section -->
+<section class="top-companies-section">
+  <div class="container">
+    <h3>Our Top Electrical Company Picks</h3>
+    
+    <div class="intro-content">
+      <p>Each electrical company below has been carefully selected based on their expertise, safety standards, client satisfaction, and proven track record in Calgary's real estate market.</p>
+    </div>
+    
+    <div class="company-cards-grid">
+      <!-- Company 1 Card -->
+      <div class="company-card" *ngFor="let company of companies; let i = index">
+        <div class="company-header">
+          <div class="company-name">{{company.name}}</div>
+          <div class="company-title">{{company.title}}</div>
+        </div>
+        
+        <div class="company-contact">
+          <div class="contact-line">
+            <strong>Website:</strong> 
+            <a [href]="company.website" target="_blank" rel="noopener noreferrer">{{company.website}}</a>
+          </div>
+          <div class="contact-line">
+            <strong>Phone:</strong> {{company.phone}}
+          </div>
+          <div class="contact-line">
+            <strong>Address:</strong> {{company.address}}
+          </div>
+        </div>
+        
+        <div class="company-content">
+          <div class="company-recommendation">
+            <h4>Why We Recommend {{company.name.split(' ')[0]}}</h4>
+            <p>{{company.recommendation}}</p>
+            
+            <div class="services-list" *ngIf="company.services.length">
+              <h5>Specialized Services:</h5>
+              <ul>
+                <li *ngFor="let service of company.services">{{service}}</li>
+              </ul>
+            </div>
+            
+            <p>Homeowners appreciate their transparent approach and clean workmanship. Investors and landlords value their experience with panel upgrades, aluminum wiring correction, safety inspections, surge protection, and code corrections—all critical for rentals, refinancing, and insurance approval.</p>
+          </div>
+          
+          <div class="company-best-for" *ngIf="company.bestFor.length">
+            <h4>Best For:</h4>
+            <ul>
+              <li *ngFor="let item of company.bestFor">{{item}}</li>
+            </ul>
+          </div>
+        </div>
+        
+        <!-- Visual divider between cards -->
+        <div class="card-divider" *ngIf="i < companies.length - 1"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why Companies Matter Section -->
+<section class="why-section">
+  <div class="container">
+    <h2>Why the Right Electrical Company Matters</h2>
+    <p>Electrical deficiencies are one of the most common problems found during home inspections and insurance reviews. A qualified electrical contractor will:</p>
+    
+    <div class="benefits-grid">
+      <div class="benefit-item" *ngFor="let benefit of benefits">
+        <h3>{{benefit}}</h3>
+        <p>{{getBenefitDescription(benefit)}}</p>
+      </div>
+    </div>
+    
+    <div class="warning-section">
+      <h3>⚠️ The Risk of Choosing Wrong</h3>
+      <p>The wrong electrical work can lead to inspection failures, denied insurance coverage, and costly corrective upgrades—all of which directly erode returns and increase risk. Protecting your investment starts with choosing the right electrical expert.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Ready to Get Started Section -->
+<section class="ready-section">
+  <div class="container">
+    <h2>🚀 Ready to Get Started?</h2>
+    <p>You can confidently contact any of the electrical companies listed above—these recommendations are independent and uncompensated.</p>
+    <p style="margin-top: 20px;">Before approving electrical work or finalizing renovation budgets, return to Home IQ to evaluate the financial impact:</p>
+  </div>
+</section>
+
+<!-- Tools Section -->
+<app-tools-section 
+  variant="electrical"
+  title="🔧 Popular Tools for Homeowners & Real Estate Investors"
+  description="Use our tools to make smarter, more confident real-estate decisions—including how electrical upgrades impact your investments.">
+</app-tools-section>

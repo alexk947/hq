@@ -1,0 +1,41 @@
+<!-- components/insurance-brokers/insurance-brokers.component.html -->
+<!-- w16 -->
+<app-insurance-brokers-hero></app-insurance-brokers-hero>
+
+<!-- Top Insurance Brokers Section -->
+<section class="top-brokers-section">
+  <div class="container">
+    <h3>Our Top Insurance Broker Picks</h3>
+    
+    <div class="intro-content">
+      <p>Each insurance broker below has been carefully selected based on their expertise in property insurance, client satisfaction, and proven track record in Calgary's real estate market.</p>
+    </div>
+    
+    <div class="broker-cards-grid">
+      <app-broker-card 
+        *ngFor="let broker of brokers; let last = last"
+        [broker]="broker"
+        [showDivider]="!last">
+      </app-broker-card>
+    </div>
+  </div>
+</section>
+
+<app-benefits-grid></app-benefits-grid>
+
+<!-- Ready to Get Started Section -->
+<section class="ready-section">
+  <div class="container">
+    <h2>🚀 Ready to Get Started?</h2>
+    <p>You can confidently contact any of the insurance brokers listed above—these recommendations are independent and uncompensated.</p>
+    <p style="margin-top: 20px;">Before committing to a policy, return to Home IQ and confirm how insurance affects your numbers:</p>
+  </div>
+</section>
+
+
+<!-- Tools Section -->
+<app-tools-section 
+  variant="insurance"
+  title="🔧 Popular Tools for Homeowners & Investors"
+  description="Use our tools to make smarter, more confident real-estate decisions—including how insurance impacts your investments.">
+</app-tools-section>

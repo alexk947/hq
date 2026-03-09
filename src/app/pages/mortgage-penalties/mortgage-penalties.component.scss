@@ -1,0 +1,292 @@
+/* Обновляем глобальные переменные для этой страницы */
+:host {
+  /* Bloomberg-inspired color palette */
+  --black: #121212;
+  --gray-90: #1a1a1a;
+  --gray-80: #2a2a2a;
+  --gray-70: #3a3a3a;
+  --gray-60: #555;
+  --gray-50: #777;
+  --gray-40: #999;
+  --gray-30: #bbb;
+  --gray-20: #ddd;
+  --gray-10: #f0f0f0;
+  --gray-5: #f8f8f8;
+  --white: #fff;
+  
+  /* Typography */
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  
+  /* Spacing */
+  --container-width: 760px;
+  --header-height: 56px;
+  --section-spacing: 64px;
+  --paragraph-spacing: 24px;
+  --element-spacing: 16px;
+}
+
+/* Контейнер для страницы */
+.mortgage-penalties-page {
+  max-width: var(--container-width);
+  padding: 0 1.5rem;
+  
+  @media (max-width: 768px) {
+    padding: 0 1.25rem;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 0 1rem;
+  }
+}
+
+/* Typography для статьи */
+.article-header {
+  padding: 3rem 0 2rem;
+}
+
+.article-title {
+  font-size: 2.75rem;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--black);
+  margin-bottom: 1rem;
+}
+
+.article-meta {
+  color: var(--gray-60);
+  font-size: 0.95rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--gray-20);
+}
+
+.article-content {
+  padding: 2rem 0 4rem;
+}
+
+/* Общие стили для текста */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--black);
+  margin-bottom: var(--element-spacing);
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+}
+
+h2 {
+  font-size: 1.75rem;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--gray-20);
+}
+
+h3 {
+  font-size: 1.25rem;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+}
+
+h4 {
+  font-size: 1.1rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+p {
+  margin-bottom: var(--paragraph-spacing);
+  line-height: 1.7;
+  color: var(--gray-80);
+}
+
+.lead {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: var(--gray-70);
+  margin-bottom: 2.5rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--gray-20);
+}
+
+strong {
+  font-weight: 600;
+  color: var(--black);
+}
+
+a {
+  color: var(--black);
+  text-decoration: underline;
+  text-decoration-color: var(--gray-40);
+  text-underline-offset: 3px;
+  transition: text-decoration-color 0.2s;
+  
+  &:hover {
+    text-decoration-color: var(--black);
+  }
+}
+
+/* Lists */
+ul, ol {
+  margin-bottom: var(--paragraph-spacing);
+  padding-left: 1.5rem;
+}
+
+li {
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+  color: var(--gray-80);
+}
+
+/* Blockquotes and highlights */
+.important-note {
+  position: relative;
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background-color: var(--gray-5);
+  border-left: 3px solid var(--gray-80);
+  
+  p {
+    margin-bottom: 0.5rem;
+  }
+  
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+/* Tables/Comparisons */
+.comparison {
+  margin: 2rem 0;
+  border: 1px solid var(--gray-20);
+}
+
+.comparison-row {
+  display: flex;
+  border-bottom: 1px solid var(--gray-20);
+  
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.comparison-label {
+  flex: 1;
+  padding: 1rem;
+  font-weight: 600;
+  background-color: var(--gray-5);
+  border-right: 1px solid var(--gray-20);
+}
+
+.comparison-value {
+  flex: 1;
+  padding: 1rem;
+}
+
+/* Inline code/formulas */
+.formula {
+  font-family: 'Courier New', monospace;
+  background-color: var(--gray-5);
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  font-size: 0.9em;
+  color: var(--gray-80);
+}
+
+/* Example boxes */
+.example {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background-color: var(--gray-5);
+  border-top: 1px solid var(--gray-20);
+  border-bottom: 1px solid var(--gray-20);
+}
+
+.example-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--gray-80);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Step-by-step */
+.step {
+  margin: 2rem 0;
+  counter-increment: step-counter;
+  
+  &::before {
+    content: counter(step-counter);
+    display: inline-block;
+    width: 1.75rem;
+    height: 1.75rem;
+    line-height: 1.75rem;
+    text-align: center;
+    background-color: var(--black);
+    color: var(--white);
+    font-size: 0.875rem;
+    font-weight: 600;
+    border-radius: 50%;
+    margin-right: 0.75rem;
+    vertical-align: middle;
+  }
+}
+
+.step-title {
+  display: inline-block;
+  vertical-align: middle;
+  font-weight: 600;
+}
+
+.step-content {
+  margin-top: 1rem;
+  margin-left: 2.5rem;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+  }
+  
+  .article-title {
+    font-size: 2.25rem;
+  }
+  
+  .lead {
+    font-size: 1.125rem;
+  }
+  
+  .comparison-row {
+    flex-direction: column;
+  }
+  
+  .comparison-label {
+    border-right: none;
+    border-bottom: 1px solid var(--gray-20);
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.75rem;
+  }
+  
+  h2 {
+    font-size: 1.25rem;
+  }
+  
+  .article-title {
+    font-size: 2rem;
+  }
+}

@@ -1,0 +1,48 @@
+<section id="find-trusted" #findTrustedSection class="container categories-section">
+  <h2>Find Trusted Real Estate Professionals</h2>
+
+  <div class="carousel-wrapper">
+    
+    <!-- LEFT ARROW -->
+    <button class="carousel-arrow left" (click)="prevSlide()">
+      ‹
+    </button>
+
+    <!-- TRACK -->
+    <div class="carousel-track">
+      <div 
+        class="carousel-inner"
+        [style.transform]="'translateX(-' + currentIndex * 100 + '%)'"
+      >
+        <div class="carousel-slide" *ngFor="let chunk of chunkedCategories">
+          <div class="categories-grid">
+            <div class="category-card" *ngFor="let category of chunk" [routerLink]="category.route">
+              <div class="category-image">
+                <img [src]="category.image" [alt]="category.title">
+              </div>
+              <div class="category-content">
+                <div class="category-title">{{ category.title }}</div>
+                <div class="category-description">{{ category.description }}</div>
+                <span class="read-more">{{ category.linkText }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT ARROW -->
+    <button class="carousel-arrow right" (click)="nextSlide()">
+      ›
+    </button>
+  </div>
+
+  <!-- PAGINATION -->
+  <div class="carousel-dots">
+    <span 
+      *ngFor="let chunk of chunkedCategories; let i = index"
+      (click)="goTo(i)"
+      [class.active]="i === currentIndex"
+    ></span>
+  </div>
+</section>

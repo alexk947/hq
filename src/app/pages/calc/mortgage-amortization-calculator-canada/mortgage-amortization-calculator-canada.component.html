@@ -1,0 +1,393 @@
+<div class="mortgage-calculator-layout">
+  <!-- Левая колонка с изображением, скрывается при открытом расписании -->
+  <div class="image-column" [class.hidden]="showSchedule">
+    <img src="32 as calculator B.jpeg" alt="Mortgage calculator illustration" />
+  </div>
+
+  <!-- Правая колонка – адаптивный контейнер -->
+  <div class="right-column" [class.schedule-open]="showSchedule">
+    <!-- Режим с открытым расписанием: форма слева фиксированной ширины, таблица справа -->
+    <div class="flex-layout" *ngIf="showSchedule; else compactLayout">
+      <!-- Блок калькулятора (форма + результаты) -->
+      <div class="calculator-area">
+        <div class="calculator-container compact">
+          <div class="calculator-header">
+            <h1>Mortgage Amortization Calculator Canada</h1>
+            <p class="subtitle">View Your Complete Amortization Schedule</p>
+          </div>
+
+          <div class="calculator-form">
+            <!-- Mortgage Amount & Interest Rate -->
+            <div class="form-row">
+              <div class="form-section compact">
+                <label>Mortgage Amount</label>
+                <div class="input-with-currency">
+                  <span class="currency">$</span>
+                  <input type="text" [value]="displayMortgageAmount" (input)="onMortgageAmountInput($event)"
+                    (blur)="onMortgageAmountBlur()" placeholder="0" class="currency-input">
+                </div>
+              </div>
+
+              <div class="form-section compact">
+                <label>Interest Rate</label>
+                <div class="input-with-percent">
+                  <input type="text" [value]="displayInterestRate" (input)="onInterestRateInput($event)"
+                    (blur)="onInterestRateBlur()" placeholder="0.000" class="percent-input">
+                  <span class="percent">%</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Amortization Period -->
+            <div class="form-section">
+              <label>Amortization Period</label>
+              <div class="dual-input compact">
+                <div class="input-group">
+                  <select [(ngModel)]="amortizationYears" (ngModelChange)="onAmortizationYearsChange()">
+                    <option *ngFor="let year of amortizationYearOptions" [value]="year">
+                      {{ year }} Years
+                    </option>
+                  </select>
+                </div>
+                <div class="input-group">
+                  <select [(ngModel)]="amortizationMonths" (ngModelChange)="onAmortizationMonthsChange()">
+                    <option *ngFor="let month of amortizationMonthOptions" [value]="month">
+                      {{ month }} Months
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Payment Frequency -->
+            <div class="form-section">
+              <label>Payment Frequency</label>
+              <div class="frequency-list-box">
+                <select [(ngModel)]="paymentFrequency" (ngModelChange)="onPaymentFrequencyChange()"
+                  class="frequency-select">
+                  <option *ngFor="let freq of paymentFrequencyOptions" [value]="freq.value">
+                    {{ freq.label }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Results Section (компактная версия) -->
+          <div class="results-section compact" *ngIf="showResults && validateInputs()">
+            <div class="results-header">
+              <h2>Amortization Summary</h2>
+            </div>
+
+            <div class="payment-result">
+              <div class="payment-amount">
+                {{ getPaymentPerPeriod() }}
+                <span class="payment-frequency">per {{ getPaymentFrequencyLabel().toLowerCase() }}</span>
+              </div>
+            </div>
+
+            <div class="summary-grid">
+              <div class="summary-item">
+                <div class="summary-label">Total Principal</div>
+                <div class="summary-value">{{ formatCurrency(paymentResults.totalPrincipal) }}</div>
+              </div>
+              <div class="summary-item">
+                <div class="summary-label">Total Interest</div>
+                <div class="summary-value">{{ formatCurrency(paymentResults.totalInterest) }}</div>
+              </div>
+              <div class="summary-item">
+                <div class="summary-label">Total Cost</div>
+                <div class="summary-value">{{ formatCurrency(paymentResults.totalCost) }}</div>
+              </div>
+              <div class="summary-item">
+                <div class="summary-label"># Payments</div>
+                <div class="summary-value">{{ formatNumber(amortizationSchedule.length) }}</div>
+              </div>
+            </div>
+
+            <!-- Breakdown Chart -->
+            <div class="breakdown-chart">
+              <div class="chart-header">
+                <h3>Payment Breakdown</h3>
+                <div class="chart-total">{{ formatCurrency(paymentResults.totalCost) }}</div>
+              </div>
+
+              <div class="chart-bars">
+                <div class="bar principal" [style.width.%]="getPrincipalPercentage()" [style.backgroundColor]="'#3182ce'">
+                  <span class="bar-label">Principal</span>
+                  <span class="bar-percentage">{{ getPrincipalPercentage().toFixed(1) }}%</span>
+                </div>
+                <div class="bar interest" [style.width.%]="getInterestPercentage()" [style.backgroundColor]="'#38a169'">
+                  <span class="bar-label">Interest</span>
+                  <span class="bar-percentage">{{ getInterestPercentage().toFixed(1) }}%</span>
+                </div>
+              </div>
+
+              <div class="chart-legend">
+                <div class="legend-item">
+                  <span class="legend-color" [style.backgroundColor]="'#3182ce'"></span>
+                  <span class="legend-text">Principal: {{ formatCurrency(paymentResults.totalPrincipal) }}</span>
+                </div>
+                <div class="legend-item">
+                  <span class="legend-color" [style.backgroundColor]="'#38a169'"></span>
+                  <span class="legend-text">Interest: {{ formatCurrency(paymentResults.totalInterest) }}</span>
+                </div>
+              </div>
+            </div>
+
+            <button class="toggle-schedule" (click)="toggleSchedule()">
+              {{ showSchedule ? 'Hide' : 'Show' }} Amortization Schedule
+            </button>
+          </div>
+
+          <div class="validation-error" *ngIf="!validateInputs()">
+            Please enter valid values for all fields.
+          </div>
+
+          <!-- Footer -->
+          <div class="footer">
+            <div class="disclaimer">
+              <p><strong>Disclaimer:</strong> This calculator provides estimates only...</p>
+            </div>
+            <div class="copyright">
+              <p>&copy; {{ currentDate | date:'yyyy' }} WOWA. All rights reserved.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Блок расписания (справа) -->
+      <div class="schedule-area">
+        <div class="amortization-schedule expanded" *ngIf="amortizationSchedule.length > 0">
+          <div class="schedule-header">
+            <h3>Amortization Schedule</h3>
+            <div class="schedule-summary">
+              Showing {{ paginatedSchedule.length }} of {{ amortizationSchedule.length }} payments
+            </div>
+          </div>
+
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Payment #</th>
+                  <th>Payment</th>
+                  <th>Principal</th>
+                  <th>Interest</th>
+                  <th>Balance</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let payment of paginatedSchedule">
+                  <td>{{ payment.period }}</td>
+                  <td>{{ formatCurrency(payment.payment) }}</td>
+                  <td>{{ formatCurrency(payment.principal) }}</td>
+                  <td>{{ formatCurrency(payment.interest) }}</td>
+                  <td>{{ formatCurrency(payment.balance) }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Пагинация -->
+          <div class="pagination-controls" *ngIf="totalPages > 1">
+            <button (click)="prevPage()" [disabled]="schedulePage === 0">Previous</button>
+            <span>Page {{ schedulePage + 1 }} of {{ totalPages }}</span>
+            <button (click)="nextPage()" [disabled]="schedulePage === totalPages - 1">Next</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Компактный режим (только форма, таблица под ней с пагинацией) -->
+    <ng-template #compactLayout>
+  <div class="calculator-container">
+    <div class="calculator-header">
+      <h1>Mortgage Amortization Calculator Canada</h1>
+      <p class="subtitle">View Your Complete Amortization Schedule</p>
+    </div>
+
+    <div class="calculator-form">
+      <!-- Mortgage Amount & Interest Rate -->
+      <div class="form-row">
+        <div class="form-section compact">
+          <label>Mortgage Amount</label>
+          <div class="input-with-currency">
+            <span class="currency">$</span>
+            <input type="text" [value]="displayMortgageAmount" (input)="onMortgageAmountInput($event)"
+              (blur)="onMortgageAmountBlur()" placeholder="0" class="currency-input">
+          </div>
+        </div>
+
+        <div class="form-section compact">
+          <label>Interest Rate</label>
+          <div class="input-with-percent">
+            <input type="text" [value]="displayInterestRate" (input)="onInterestRateInput($event)"
+              (blur)="onInterestRateBlur()" placeholder="0.000" class="percent-input">
+            <span class="percent">%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Amortization Period -->
+      <div class="form-section">
+        <label>Amortization Period</label>
+        <div class="dual-input compact">
+          <div class="input-group">
+            <select [(ngModel)]="amortizationYears" (ngModelChange)="onAmortizationYearsChange()">
+              <option *ngFor="let year of amortizationYearOptions" [value]="year">
+                {{ year }} Years
+              </option>
+            </select>
+          </div>
+          <div class="input-group">
+            <select [(ngModel)]="amortizationMonths" (ngModelChange)="onAmortizationMonthsChange()">
+              <option *ngFor="let month of amortizationMonthOptions" [value]="month">
+                {{ month }} Months
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Payment Frequency -->
+      <div class="form-section">
+        <label>Payment Frequency</label>
+        <div class="frequency-list-box">
+          <select [(ngModel)]="paymentFrequency" (ngModelChange)="onPaymentFrequencyChange()"
+            class="frequency-select">
+            <option *ngFor="let freq of paymentFrequencyOptions" [value]="freq.value">
+              {{ freq.label }}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Results Section -->
+    <div class="results-section" *ngIf="showResults && validateInputs()">
+      <div class="results-header">
+        <h2>Amortization Schedule Summary</h2>
+      </div>
+
+      <div class="payment-result">
+        <div class="payment-amount">
+          {{ getPaymentPerPeriod() }}
+          <span class="payment-frequency">per {{ getPaymentFrequencyLabel().toLowerCase() }}</span>
+        </div>
+      </div>
+
+      <div class="summary-grid">
+        <div class="summary-item">
+          <div class="summary-label">Total Principal</div>
+          <div class="summary-value">{{ formatCurrency(paymentResults.totalPrincipal) }}</div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-label">Total Interest Paid</div>
+          <div class="summary-value">{{ formatCurrency(paymentResults.totalInterest) }}</div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-label">Total Mortgage Cost</div>
+          <div class="summary-value">{{ formatCurrency(paymentResults.totalCost) }}</div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-label">Number of Payments</div>
+          <div class="summary-value">{{ formatNumber(amortizationSchedule.length) }}</div>
+        </div>
+      </div>
+
+      <!-- Breakdown Chart -->
+      <div class="breakdown-chart">
+        <div class="chart-header">
+          <h3>Payment Breakdown</h3>
+          <div class="chart-total">{{ formatCurrency(paymentResults.totalCost) }}</div>
+        </div>
+
+        <div class="chart-bars">
+          <div class="bar principal" [style.width.%]="getPrincipalPercentage()" [style.backgroundColor]="'#3182ce'">
+            <span class="bar-label">Principal</span>
+            <span class="bar-percentage">{{ getPrincipalPercentage().toFixed(1) }}%</span>
+          </div>
+          <div class="bar interest" [style.width.%]="getInterestPercentage()" [style.backgroundColor]="'#38a169'">
+            <span class="bar-label">Interest</span>
+            <span class="bar-percentage">{{ getInterestPercentage().toFixed(1) }}%</span>
+          </div>
+        </div>
+
+        <div class="chart-legend">
+          <div class="legend-item">
+            <span class="legend-color" [style.backgroundColor]="'#3182ce'"></span>
+            <span class="legend-text">Principal: {{ formatCurrency(paymentResults.totalPrincipal) }}</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-color" [style.backgroundColor]="'#38a169'"></span>
+            <span class="legend-text">Interest: {{ formatCurrency(paymentResults.totalInterest) }}</span>
+          </div>
+        </div>
+      </div>
+
+      <button class="toggle-schedule" (click)="toggleSchedule()">
+        {{ showSchedule ? 'Hide' : 'Show' }} Amortization Schedule
+      </button>
+
+      <!-- Amortization Schedule Table with pagination (в компактном режиме) -->
+      <div class="amortization-schedule" *ngIf="showSchedule && amortizationSchedule.length > 0">
+        <div class="schedule-header">
+          <h3>Amortization Schedule</h3>
+          <div class="schedule-summary">
+            Showing {{ paginatedSchedule.length }} of {{ amortizationSchedule.length }} payments
+          </div>
+        </div>
+
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Payment #</th>
+                <th>Payment</th>
+                <th>Principal</th>
+                <th>Interest</th>
+                <th>Balance</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let payment of paginatedSchedule">
+                <td>{{ payment.period }}</td>
+                <td>{{ formatCurrency(payment.payment) }}</td>
+                <td>{{ formatCurrency(payment.principal) }}</td>
+                <td>{{ formatCurrency(payment.interest) }}</td>
+                <td>{{ formatCurrency(payment.balance) }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Пагинация -->
+        <div class="pagination-controls" *ngIf="totalPages > 1">
+          <button (click)="prevPage()" [disabled]="schedulePage === 0">Previous</button>
+          <span>Page {{ schedulePage + 1 }} of {{ totalPages }}</span>
+          <button (click)="nextPage()" [disabled]="schedulePage === totalPages - 1">Next</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="validation-error" *ngIf="!validateInputs()">
+      Please enter valid values for all fields.
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <div class="disclaimer">
+        <p><strong>Disclaimer:</strong> This calculator provides estimates only. Actual mortgage payments may vary
+          based on additional factors including but not limited to mortgage insurance, property taxes, and lender-specific
+          terms. Consult with a qualified mortgage professional for personalized advice.</p>
+      </div>
+
+      <div class="copyright">
+        <p>&copy; {{ currentDate | date:'yyyy' }} WOWA. All rights reserved.</p>
+      </div>
+    </div>
+  </div>
+</ng-template>
+  </div>
+</div>

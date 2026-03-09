@@ -1,0 +1,129 @@
+<!-- Hero Banner Section -->
+<section class="hero-banner">
+  <img src="pest_control.png" 
+       alt="Calgary Pest Control & Exterminators" 
+       class="hero-banner-image">
+  <div class="hero-banner-overlay">
+    <div class="hero-banner-content container">
+      <h1 class="hero-banner-title">Pest Control & Exterminators</h1>
+      <div class="hero-banner-subtitle">Professional pest solutions for homeowners & investors</div>
+    </div>
+  </div>
+</section>
+
+<!-- Intro Section -->
+<section class="intro-section">
+  <div class="container">
+    <h1>Top 3 Pest Control & Exterminators in Calgary</h1>
+    <h2>Protecting Your Property from Rodents, Insects & Pests</h2>
+    <p>Pest control in Calgary isn't just about comfort—it's about protecting your property, tenants, and long-term investment. For homeowners, the right pest control company can prevent rodents, insects, and other pests from causing damage, stress, and health risks. For investors and landlords, a strong exterminator can be the difference between stable cashflow and constant tenant complaints, unit downtime, and surprise repair bills.</p>
+    <p>We highlight professional pest control companies with strong reputations, proven results, and Calgary-specific experience. These firms understand local pest patterns, Alberta regulations, and the realities of rental and multi-unit properties. If you want long-term prevention—not just a quick spray—this list is for you.</p>
+  </div>
+</section>
+
+<!-- Important Note Section -->
+<section class="ready-section">
+  <div class="container">
+    <div class="important-note">
+      <strong>Important:</strong>
+      <p>Our rankings are 100% independent, based on our own evaluation, research, and client feedback.</p>
+      <p>We do not receive commissions, referral fees, or any form of compensation from the companies listed here.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Top Pest Control Companies Section -->
+<section class="top-companies-section">
+  <div class="container">
+    <h3>Our Top Pest Control Company Picks</h3>
+    
+    <div class="intro-content">
+      <p>Each pest control company below has been carefully selected based on their expertise, effectiveness, client satisfaction, and proven track record in Calgary's unique climate and building environment.</p>
+    </div>
+    
+    <div class="company-cards-grid">
+      <!-- Company Cards -->
+      <div class="company-card" *ngFor="let company of companies; let i = index">
+        <div class="company-header">
+          <div class="company-name">{{company.name}}</div>
+          <div class="company-title">{{company.title}}</div>
+        </div>
+        
+        <div class="company-contact">
+          <div class="contact-line">
+            <strong>Website:</strong> 
+            <a [href]="company.website" target="_blank" rel="noopener noreferrer">{{company.website}}</a>
+          </div>
+          <div class="contact-line">
+            <strong>Phone:</strong> {{company.phone}}
+          </div>
+          <div class="contact-line">
+            <strong>Location:</strong> {{company.location}}
+          </div>
+        </div>
+        
+        <div class="company-content">
+          <div class="company-recommendation">
+            <h4>Why We Recommend {{company.name.split(' ')[0]}}</h4>
+            <p>{{company.recommendation}}</p>
+            
+            <div class="services-list" *ngIf="company.pests.length">
+              <h5>Pests They Handle:</h5>
+              <ul>
+                <li *ngFor="let pest of company.pests">{{pest}}</li>
+              </ul>
+            </div>
+            
+            <p>Clients highlight their experience, reliability, and effective treatment methods. Homeowners appreciate their thorough approach, while landlords and investors value their programs for multi-unit buildings and ongoing prevention services.</p>
+          </div>
+          
+          <div class="company-best-for" *ngIf="company.bestFor.length">
+            <h4>Best For:</h4>
+            <ul>
+              <li *ngFor="let item of company.bestFor">{{item}}</li>
+            </ul>
+          </div>
+        </div>
+        
+        <!-- Visual divider between cards -->
+        <div class="card-divider" *ngIf="i < companies.length - 1"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why Companies Matter Section -->
+<section class="why-section">
+  <div class="container">
+    <h2>What Choosing the Right or Wrong Pest Control Company Does to Your Property</h2>
+    <p>The right pest control company doesn't just kill bugs or catch mice—they protect your building, reputation, and returns. A skilled exterminator will:</p>
+    
+    <div class="benefits-grid">
+      <div class="benefit-item" *ngFor="let benefit of benefits">
+        <h3>{{benefit}}</h3>
+        <p>{{getBenefitDescription(benefit)}}</p>
+      </div>
+    </div>
+    
+    <div class="warning-section">
+      <h3>⚠️ The Cost of Poor Pest Control</h3>
+      <p>For investors, a poor-quality provider can mean recurring infestations, frustrated tenants, negative reviews, longer vacancies, and unexpected repair bills (chewed wiring, damaged insulation, contaminated storage areas). In multi-unit buildings, weak pest control can quickly spread a problem—turning a small issue into a multi-thousand-dollar headache.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Ready to Get Started Section -->
+<section class="ready-section">
+  <div class="container">
+    <h2>🚀 Ready to Get Started?</h2>
+    <p>Our top picks are selected independently and without compensation, so you can feel confident reaching out to any company on this list.</p>
+    <p class="highlighted-text">Then return to our free tools. Before committing to a long-term pest program or major remediation, run the numbers using our calculators:</p>
+  </div>
+</section>
+
+<!-- Tools Section -->
+<app-tools-section 
+  variant="pestcontrol"
+  title="🔧 Our Most Popular Free Tools"
+  description="Investor-focused & homeowner-friendly tools to make smarter property decisions.">
+</app-tools-section>

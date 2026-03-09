@@ -1,0 +1,145 @@
+<div class="calculator-container">
+  <div class="calculator-header">
+    <h1>Mortgage affordability calculator</h1>
+    <p class="subtitle">How much can you afford?</p>
+  </div>
+
+  <div class="calculator-content">
+    <div class="calculator-form">
+      <form [formGroup]="affordabilityForm" (ngSubmit)="calculate()">
+        <h2 class="section-title">Let's start with the basics</h2>
+
+        <!-- First row: 3 fields -->
+        <div class="fields-row">
+          <div class="form-group">
+            <label for="incomeAnnual">Total gross annual household income</label>
+            <div class="input-with-currency">
+              <span class="currency">$</span>
+              <input id="incomeAnnual" type="text" formControlName="incomeAnnual"
+                     (input)="onInput($event, 'incomeAnnual')" (blur)="onBlur($event, 'incomeAnnual')"
+                     placeholder="0" class="compact-input">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="downPayment">Down payment</label>
+            <div class="input-with-currency">
+              <span class="currency">$</span>
+              <input id="downPayment" type="text" formControlName="downPayment"
+                     (input)="onInput($event, 'downPayment')" (blur)="onBlur($event, 'downPayment')"
+                     placeholder="0" class="compact-input">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="province">Province or territory of residence</label>
+            <div class="select-wrapper">
+              <select id="province" formControlName="province" class="compact-input">
+                <option value="" disabled selected>Select a province or territory</option>
+                <option *ngFor="let province of provinces" [value]="province.value">
+                  {{ province.label }}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Second row: 3 fields -->
+        <div class="fields-row">
+          <div class="form-group">
+            <label for="monthlyLoansAndDebts">Loans and other debts (per month)</label>
+            <div class="input-with-currency">
+              <span class="currency">$</span>
+              <input id="monthlyLoansAndDebts" type="text" formControlName="monthlyLoansAndDebts"
+                     (input)="onInput($event, 'monthlyLoansAndDebts')" (blur)="onBlur($event, 'monthlyLoansAndDebts')"
+                     placeholder="0" class="compact-input">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="totalCreditCardsAndLOC">Credit cards and lines of credit (total owing)</label>
+            <div class="input-with-currency">
+              <span class="currency">$</span>
+              <input id="totalCreditCardsAndLOC" type="text" formControlName="totalCreditCardsAndLOC"
+                     (input)="onInput($event, 'totalCreditCardsAndLOC')" (blur)="onBlur($event, 'totalCreditCardsAndLOC')"
+                     placeholder="0" class="compact-input">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="monthlyCondoFees">Monthly condo fees (if applicable)</label>
+            <div class="input-with-currency">
+              <span class="currency">$</span>
+              <input id="monthlyCondoFees" type="text" formControlName="monthlyCondoFees"
+                     (input)="onInput($event, 'monthlyCondoFees')" (blur)="onBlur($event, 'monthlyCondoFees')"
+                     placeholder="0" class="compact-input">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary btn-full" [disabled]="affordabilityForm.invalid">
+            Calculate
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Results Panel -->
+    <div class="results-panel" *ngIf="result()">
+      <div class="results-header">
+        <h2>Your affordability estimate</h2>
+      </div>
+
+      <div class="main-result">
+        <div class="result-label">Maximum purchase price</div>
+        <div class="result-value">{{ formatCurrency(result()!.maxAffordablePurchasePrice) }}</div>
+        <div class="result-note">†</div>
+      </div>
+
+      <div class="secondary-result">
+        <div class="result-label">Monthly mortgage payment</div>
+        <div class="result-value">{{ formatCurrency(result()!.monthlyPayment) }}</div>
+      </div>
+
+      <!-- Tip: increase down payment -->
+      <div class="tip" *ngIf="result()!.limitingFactor === 'MIN_DOWN_PAYMENT' && result()!.nextLimitPrice">
+        <p>
+          <strong>Tip:</strong> Consider increasing your down payment to
+          {{ formatCurrency(result()!.recommendedDownPayment!) }} to qualify for a maximum purchase price of approximately
+          {{ formatCurrency(result()!.nextLimitPrice!) }}.
+        </p>
+      </div>
+
+      <div class="result-details">
+        <h3>What your purchase price includes</h3>
+        <div class="detail-item">
+          <span class="detail-label">Total mortgage amount</span>
+          <span class="detail-value">{{ formatCurrency(result()!.insuredMortgageAmount) }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Down payment</span>
+          <span class="detail-value">{{ formatCurrency(result()!.effectiveDownPayment) }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">GDS Ratio</span>
+          <span class="detail-value">{{ result()!.gdsRatio | number:'1.1-1' }}%</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">TDS Ratio</span>
+          <span class="detail-value">{{ result()!.tdsRatio | number:'1.1-1' }}%</span>
+        </div>
+      </div>
+
+      <div class="limiting-factor" *ngIf="result()">
+        <div class="factor-label">Limiting Factor:</div>
+        <div class="factor-value">{{ factorLabel(result()!.limitingFactor) }}</div>
+      </div>
+
+      <div class="disclaimer">
+        <p>† Calculator applies to residential mortgages only. Results are approximate and for illustration purposes only; do not rely on this information when making financial decisions; visit your CIBC Banking Centre or speak with a CIBC Mortgage Advisor.</p>
+        <p>Results are based on the information you provide, estimates and assumptions on which pre-filled amounts are based, and interest rates which, for purposes of the calculation, are assumed to remain constant throughout the term. Actual rates may vary and will affect the amount you can borrow.</p>
+      </div>
+    </div>
+  </div>
+</div>

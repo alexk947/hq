@@ -1,0 +1,313 @@
+<!-- Hero Banner Section -->
+<section class="hero-banner">
+  <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80" alt="Contact HomeIQ" class="hero-banner-image">
+  <div class="hero-banner-overlay">
+    <div class="hero-banner-content container">
+      <h1 class="hero-banner-title">Send Us a Message</h1>
+      <div class="hero-banner-subtitle">Get in touch with our team for inquiries, suggestions, or trade recommendations</div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Form Section -->
+<section class="contact-section">
+  <div class="container">
+    <div class="section-header">
+      <h2>How Can We Help You?</h2>
+      <p class="section-subtitle">Fill out the form below and we'll get back to you as soon as possible.</p>
+    </div>
+    
+    <div class="contact-form-container">
+      <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="contact-form">
+        <!-- Personal Information -->
+        <div class="form-section">
+          <h3 class="form-section-title">Personal Information</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="firstName">First Name *</label>
+              <input type="text" id="firstName" formControlName="firstName" placeholder="Your first name" [class.error]="showError('firstName')">
+              <div class="error-message" *ngIf="showError('firstName')">Please enter your first name</div>
+            </div>
+            <div class="form-group">
+              <label for="lastName">Last Name *</label>
+              <input type="text" id="lastName" formControlName="lastName" placeholder="Your last name" [class.error]="showError('lastName')">
+              <div class="error-message" *ngIf="showError('lastName')">Please enter your last name</div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email">Email Address *</label>
+              <input type="email" id="email" formControlName="email" placeholder="you@example.com" [class.error]="showError('email')">
+              <div class="error-message" *ngIf="showError('email')">Please enter a valid email address</div>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" formControlName="phone" placeholder="(403) 555-0123">
+            </div>
+          </div>
+        </div>
+        
+        <!-- Inquiry Type -->
+      <!-- Inquiry Type -->
+<div class="form-section">
+  <h3 class="form-section-title">Inquiry Details</h3>
+  
+  <div class="form-group">
+    <label for="inquiryType">How can we help? *</label>
+    <select 
+      id="inquiryType" 
+      formControlName="inquiryType"
+      (change)="onInquiryTypeChange($event)"
+      [class.error]="showError('inquiryType')">
+      <option value="">Select an option</option>
+      <option value="request-trades">Request 3 Trades options</option>
+      <option value="contribute-blog">Contribute a Blog</option>
+      <option value="feedback">Feedback</option>
+      <option value="general">General Inquiry</option>
+      <option value="partnership">Partnership Opportunity</option>
+    </select>
+    <div class="error-message" *ngIf="showError('inquiryType')">
+      Please select how we can help you
+    </div>
+  </div>
+  
+  <!-- Specific Trade Dropdown (conditionally shown) -->
+  <div class="form-group" *ngIf="showSpecificTrade">
+    <label for="specificTrade">Select Specific Trade *</label>
+    <select 
+      id="specificTrade" 
+      formControlName="specificTrade"
+      [class.error]="showError('specificTrade')">
+      <option value="">Select a specific trade</option>
+      <!-- A -->
+      <optgroup label="A">
+        <option value="appliance-repair">Appliance Repair Technician</option>
+        <option value="asbestos-abatement">Asbestos Abatement Contractor</option>
+        <option value="asphalt-contractor">Asphalt Contractor</option>
+        <option value="av-installer">Audio-Visual / Home Theatre Installer</option>
+      </optgroup>
+      <!-- B -->
+      <optgroup label="B">
+        <option value="basement-contractor">Basement Development Contractor</option>
+        <option value="bricklayer">Bricklayer / Mason</option>
+        <option value="building-envelope">Building Envelope Specialist</option>
+      </optgroup>
+      <!-- C -->
+      <optgroup label="C">
+        <option value="cabinet-maker">Cabinet Maker</option>
+        <option value="carpet-installer">Carpet Installer</option>
+        <option value="caulking-contractor">Caulking & Sealing Contractor</option>
+        <option value="chimney-sweep">Chimney Sweep / Repair</option>
+        <option value="concrete-contractor">Concrete Contractor</option>
+        <option value="countertop-installer">Countertop Installer</option>
+        <option value="crawl-space-specialist">Crawl Space Specialist</option>
+      </optgroup>
+      <!-- D -->
+      <optgroup label="D">
+        <option value="deck-builder">Deck Builder</option>
+        <option value="demolition-contractor">Demolition Contractor</option>
+        <option value="drain-cleaning">Drain Cleaning / Sewer Contractor</option>
+        <option value="drywall-installer">Drywall Installer / Taper</option>
+      </optgroup>
+      <!-- E -->
+      <optgroup label="E">
+        <option value="electrician">Electrician</option>
+        <option value="energy-consultant">Energy Efficiency Consultant</option>
+        <option value="eavestrough-installer">Eavestrough Installer</option>
+      </optgroup>
+      <!-- F -->
+      <optgroup label="F">
+        <option value="fence-builder">Fence Builder</option>
+        <option value="fire-restoration">Fire & Smoke Restoration Contractor</option>
+        <option value="flooring-installer">Flooring Installer (Hardwood, Vinyl, Laminate, Tile)</option>
+        <option value="foundation-repair">Foundation Repair Specialist</option>
+        <option value="furnace-technician">Furnace Technician</option>
+      </optgroup>
+      <!-- G -->
+      <optgroup label="G">
+        <option value="garage-builder">Garage Builder</option>
+        <option value="garage-door-installer">Garage Door Installer / Repair</option>
+        <option value="gas-fitter">Gas Fitter</option>
+        <option value="general-contractor">General Contractor</option>
+        <option value="glass-glazier">Glass / Glazier</option>
+      </optgroup>
+      <!-- H -->
+      <optgroup label="H">
+        <option value="handyman">Handyman</option>
+        <option value="hvac-technician">Heating & Cooling (HVAC) Technician</option>
+        <option value="home-automation">Home Automation Technician</option>
+        <option value="home-inspector">Home Inspector</option>
+      </optgroup>
+      <!-- I -->
+      <optgroup label="I">
+        <option value="insulation-installer">Insulation Installer</option>
+        <option value="irrigation-contractor">Irrigation / Sprinkler Contractor</option>
+      </optgroup>
+      <!-- J -->
+      <optgroup label="J">
+        <option value="junk-removal">Junk Removal Service</option>
+      </optgroup>
+      <!-- K -->
+      <optgroup label="K">
+        <option value="kitchen-renovation">Kitchen Renovation Contractor</option>
+      </optgroup>
+      <!-- L -->
+      <optgroup label="L">
+        <option value="landscape-designer">Landscape Designer</option>
+        <option value="landscaper">Landscaper</option>
+        <option value="lawn-care">Lawn Care & Snow Removal</option>
+        <option value="locksmith">Locksmith</option>
+      </optgroup>
+      <!-- M -->
+      <optgroup label="M">
+        <option value="masonry-contractor">Masonry Contractor</option>
+        <option value="millwork-installer">Millwork Installer</option>
+        <option value="mold-remediation">Mold Remediation Specialist</option>
+      </optgroup>
+      <!-- O -->
+      <optgroup label="O">
+        <option value="outdoor-lighting">Outdoor Lighting Installer</option>
+      </optgroup>
+      <!-- P -->
+      <optgroup label="P">
+        <option value="painter">Painter</option>
+        <option value="pest-control">Pest Control Technician</option>
+        <option value="plasterer">Plasterer</option>
+        <option value="plumber">Plumber</option>
+        <option value="pool-technician">Pool & Hot Tub Technician</option>
+      </optgroup>
+      <!-- R -->
+      <optgroup label="R">
+        <option value="radon-mitigation">Radon Mitigation Specialist</option>
+        <option value="appliance-installer">Refrigerator / Appliance Installer</option>
+        <option value="restoration-contractor">Restoration Contractor (Water / Fire / Mold)</option>
+        <option value="roof-inspector">Roof Inspector</option>
+        <option value="roofer">Roofer</option>
+      </optgroup>
+      <!-- S -->
+      <optgroup label="S">
+        <option value="siding-installer">Siding Installer</option>
+        <option value="smart-home-installer">Smart Home Installer</option>
+        <option value="snow-removal">Snow Removal Contractor</option>
+        <option value="solar-panel-installer">Solar Panel Installer</option>
+        <option value="soundproofing-contractor">Soundproofing Contractor</option>
+        <option value="stone-installer">Stone Installer</option>
+        <option value="structural-repair">Structural Repair Contractor</option>
+      </optgroup>
+      <!-- T -->
+      <optgroup label="T">
+        <option value="tiler">Tiler</option>
+        <option value="tree-service">Tree Service / Arborist</option>
+      </optgroup>
+      <!-- U -->
+      <optgroup label="U">
+        <option value="upholstery-cleaner">Upholstery Cleaner</option>
+      </optgroup>
+      <!-- V -->
+      <optgroup label="V">
+        <option value="ventilation-contractor">Ventilation Contractor</option>
+      </optgroup>
+      <!-- W -->
+      <optgroup label="W">
+        <option value="waste-rental">Waste & Bin Rental Service</option>
+        <option value="water-damage">Water Damage Restoration</option>
+        <option value="water-filtration">Water Filtration / Softener Installer</option>
+        <option value="water-heater">Water Heater / Hot Water Tank Technician</option>
+        <option value="window-door-installer">Window & Door Installer</option>
+      </optgroup>
+      <!-- Y -->
+      <optgroup label="Y">
+        <option value="yard-maintenance">Yard Maintenance Contractor</option>
+      </optgroup>
+    </select>
+    <div class="error-message" *ngIf="showError('specificTrade')">
+      Please select a specific trade
+    </div>
+  </div>
+</div>
+        
+        <!-- Message -->
+        <div class="form-section">
+          <h3 class="form-section-title">Your Message</h3>
+          <div class="form-group">
+            <label for="message">Message *</label>
+            <textarea id="message" formControlName="message" rows="6" placeholder="Please provide details about your inquiry..." [class.error]="showError('message')"></textarea>
+            <div class="error-message" *ngIf="showError('message')">Please enter your message (minimum 20 characters)</div>
+            <div class="char-count">{{ contactForm.get('message')?.value?.length || 0 }}/1000 characters</div>
+          </div>
+        </div>
+        
+        <!-- Additional Options -->
+        <div class="form-section">
+          <div class="form-group checkbox-group">
+            <input type="checkbox" id="newsletter" formControlName="newsletter">
+            <label for="newsletter">Subscribe to our newsletter for updates and home improvement tips</label>
+          </div>
+          <div class="form-group checkbox-group">
+            <input type="checkbox" id="agreeTerms" formControlName="agreeTerms" [class.error]="showError('agreeTerms')">
+            <label for="agreeTerms" class="required">I agree to the Terms of Service and Privacy Policy *</label>
+            <div class="error-message" *ngIf="showError('agreeTerms')">You must agree to the terms and conditions</div>
+          </div>
+        </div>
+        
+        <!-- Submit Button -->
+        <div class="form-submit">
+          <button type="submit" class="button-primary button-large" [disabled]="contactForm.invalid || isSubmitting">
+            {{ isSubmitting ? 'Sending...' : 'Send Message' }}
+          </button>
+          <p class="form-note">We typically respond within 24-48 hours during business days.</p>
+        </div>
+      </form>
+      
+      <!-- Success Message -->
+      <div class="success-message" *ngIf="isSuccess">
+        <div class="success-icon">✅</div>
+        <h3>Message Sent Successfully!</h3>
+        <p>Thank you for contacting us, {{ contactForm.value.firstName }}! We've received your message and will get back to you as soon as possible.</p>
+        <p><strong>Reference ID:</strong> {{ referenceId }}</p>
+        <div class="success-actions">
+          <button class="button-secondary" (click)="resetForm()">Send Another Message</button>
+          <a routerLink="/" class="button-link">Back to Home</a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Contact Info Sidebar -->
+    <div class="contact-info-sidebar" *ngIf="!isSuccess">
+      <div class="info-card">
+        <h3>Contact Information</h3>
+        <div class="info-item">
+          <div class="info-icon">📧</div>
+          <div>
+            <h4>Email</h4>
+            <p>info@home-iq.ca</p>
+            <p class="info-note">For general inquiries</p>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">⏰</div>
+          <div>
+            <h4>Response Time</h4>
+            <p>24-48 hours</p>
+            <p class="info-note">During business days</p>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">📍</div>
+          <div>
+            <h4>Based in Calgary</h4>
+            <p>Serving homeowners and professionals across Alberta</p>
+          </div>
+        </div>
+        <div class="info-tip">
+          <h4>💡 Tips for a Better Response</h4>
+          <ul>
+            <li>Be specific about your needs</li>
+            <li>Include relevant property details</li>
+            <li>Mention your timeline if urgent</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

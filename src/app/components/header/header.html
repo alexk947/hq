@@ -1,0 +1,48 @@
+<!-- components/header/header.component.html -->
+<header class="header">
+  <div class="header-container">
+    <div class="logo">
+  <a routerLink="/" aria-label="HomeIQ">
+    <svg
+      class="logo-svg"
+      viewBox="0 0 600 180"
+      xmlns="http://www.w3.org/2000/svg"
+      role="img"
+    >
+      <title>HomeIQ</title>
+
+      <style>
+        .text {
+          font-family: Arial, Helvetica, sans-serif;
+          font-weight: 600;
+          fill: rgb(38, 99, 234);
+        }
+      </style>
+      <!-- Home -->
+      <text x="40" y="120" font-size="120" class="text">HomeIQ</text>
+      <!-- Separator -->
+      <!-- <rect x="330" y="35" width="10" height="95" fill="rgb(4, 112, 187)" /> -->
+      <!-- IQ -->
+      <!-- <text x="360" y="120" font-size="96" class="text">IQ</text> -->
+    </svg>
+  </a>
+</div>
+
+
+
+
+    <button class="mobile-menu-btn" (click)="toggleMenu()">☰</button>
+
+    <nav class="nav" [class.active]="isMenuOpen">
+      <ul>
+        <li><a href="#mortgage-rates" (click)="scrollToRates($event)">Mortgage Rates</a></li>
+        <li><a href="#find-trusted" (click)="scrollToFindTrusted($event)">Professionals</a></li>
+        <li><a href="#smart-guides" (click)="scrollToSmartGuides($event)">Blog</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-cta">
+      <button class="button-primary">Find a Professional</button>
+    </div>
+  </div>
+</header>

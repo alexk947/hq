@@ -1,0 +1,22 @@
+<!-- tools-section.component.html -->
+<section class="tools-section">
+  <div class="container">
+    <h2>{{title}}</h2>
+    <p>{{description}}</p>
+    
+    <div class="tools-grid">
+      <div class="tool-card" [class.special-tool]="tool.isSpecial" *ngFor="let tool of tools">
+        <h3>{{ tool.name }}</h3>
+        <p>{{ tool.description }}</p>
+        <a [routerLink]="getToolRoute(tool)" class="button-primary">
+          {{getActionText(tool)}}
+        </a>
+      </div>
+    </div>
+    
+    <div class="final-cta">
+      <p>👉 Use our tools to make smarter, more confident real-estate decisions—before you commit to any property.</p>
+      <a routerLink="/tools" class="button-primary">Explore All Tools</a>
+    </div>
+  </div>
+</section>

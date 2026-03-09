@@ -1,0 +1,129 @@
+<!-- Hero Banner Section -->
+<section class="hero-banner">
+  <img src="real_estate_appraisal_firms.png" 
+       alt="Calgary Real Estate Appraisal Firms" 
+       class="hero-banner-image">
+  <div class="hero-banner-overlay">
+    <div class="hero-banner-content container">
+      <h1 class="hero-banner-title">Appraisal Firms</h1>
+      <div class="hero-banner-subtitle">Trusted valuations for homeowners & investors</div>
+    </div>
+  </div>
+</section>
+
+<!-- Intro Section -->
+<section class="intro-section">
+  <div class="container">
+    <h1>Top 3 Real Estate Appraisal Firms in Calgary</h1>
+    <h2>Trusted Valuations for Homeowners & Investors</h2>
+    <p>Choosing the right appraisal firm in Calgary is one of the most important decisions you can make—whether you're buying, refinancing, settling an estate, dividing assets, or evaluating an investment property. For homeowners, the appraisal can determine how much financing you qualify for and whether a transaction proceeds smoothly. For investors, a strong appraiser can be the difference between a well-priced acquisition and an over-valued asset that erodes returns.</p>
+    <p>We highlight only experienced, professional real estate appraisal firms—firms that understand Calgary's neighbourhoods, lender requirements, and investor considerations. These appraisers produce reports that stand up to scrutiny from banks, lawyers, auditors, and tax authorities.</p>
+  </div>
+</section>
+
+<!-- Important Note Section -->
+<section class="ready-section">
+  <div class="container">
+    <div class="important-note">
+      <strong>Important:</strong>
+      <p>Our rankings are 100% independent, based on our own evaluation, research, and client feedback.</p>
+      <p>We do not receive commissions, referral fees, or any form of compensation from the firms listed here.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Top Appraisal Firms Section -->
+<section class="top-firms-section">
+  <div class="container">
+    <h3>Our Top Real Estate Appraisal Firm Picks</h3>
+    
+    <div class="intro-content">
+      <p>Each appraisal firm below has been carefully selected based on their expertise, reliability, and proven track record in Calgary's diverse real estate market.</p>
+    </div>
+    
+    <div class="firm-cards-grid">
+      <!-- Firm Cards -->
+      <div class="firm-card" *ngFor="let firm of firms; let i = index">
+        <div class="firm-header">
+          <div class="firm-name">{{firm.name}}</div>
+          <div class="firm-title">{{firm.title}}</div>
+        </div>
+        
+        <div class="firm-contact">
+          <div class="contact-line">
+            <strong>Website:</strong> 
+            <a [href]="firm.website" target="_blank" rel="noopener noreferrer">{{firm.website}}</a>
+          </div>
+          <div class="contact-line">
+            <strong>Phone:</strong> {{firm.phone}}
+          </div>
+          <div class="contact-line">
+            <strong>Location:</strong> {{firm.location}}
+          </div>
+        </div>
+        
+        <div class="firm-content">
+          <div class="firm-recommendation">
+            <h4>Why We Recommend {{firm.name.split(' ')[0]}}</h4>
+            <p>{{firm.recommendation}}</p>
+            
+            <div class="services-list" *ngIf="firm.services.length">
+              <h5>Appraisal Services:</h5>
+              <ul>
+                <li *ngFor="let service of firm.services">{{service}}</li>
+              </ul>
+            </div>
+            
+            <p>Homeowners value their clear communication and realistic timelines. Investors appreciate their experience with income-producing properties, development land, and complex valuation scenarios where defensible assumptions truly matter.</p>
+          </div>
+          
+          <div class="firm-best-for" *ngIf="firm.bestFor.length">
+            <h4>Best For:</h4>
+            <ul>
+              <li *ngFor="let item of firm.bestFor">{{item}}</li>
+            </ul>
+          </div>
+        </div>
+        
+        <!-- Visual divider between cards -->
+        <div class="card-divider" *ngIf="i < firms.length - 1"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why Firms Matter Section -->
+<section class="why-section">
+  <div class="container">
+    <h2>What Choosing the Right or Wrong Appraisal Firm Does to Your Deal</h2>
+    <p>Choosing the right appraisal firm directly affects financing approvals, negotiations, and long-term strategy. A skilled appraiser understands Calgary's micro-markets, sale trends, rental dynamics, and lender expectations. For homeowners, this often means fewer surprises and smoother approvals.</p>
+    <p>For investors, the stakes are even higher. An inaccurate valuation can distort cashflow, cap-rate analysis, and ROI projections. In Calgary—where neighbourhood-level differences matter—your appraiser must think like an investor and risk analyst, not just a box-checker. A strong appraisal supports your strategy; a weak one can derail it.</p>
+    
+    <div class="benefits-grid">
+      <div class="benefit-item" *ngFor="let benefit of benefits">
+        <h3>{{benefit}}</h3>
+        <p>{{getBenefitDescription(benefit)}}</p>
+      </div>
+    </div>
+    
+    <div class="warning-section">
+      <h3>⚠️ The Risk of Poor Appraisal</h3>
+      <p>A weak or inaccurate appraisal can lead to denied financing, overpaying for properties, poor investment decisions, and legal complications. The right appraisal firm is an essential partner in any real estate transaction.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Ready to Get Started Section -->
+<section class="ready-section">
+  <div class="container">
+    <h2>🚀 Ready to Get Started?</h2>
+    <p>Our top picks are selected independently and without compensation, so you can feel confident reaching out to any professional on this list.</p>
+    <p class="highlighted-text">Then return to our free tools. Before making a final decision on a purchase, refinance, or renovation strategy, analyze the numbers with precision using our calculators:</p>
+  </div>
+</section>
+
+<!-- Tools Section -->
+<app-tools-section   
+  title="🔧 Our Most Popular Free Tools"
+  description="Investor-focused & homeowner-friendly tools to make smarter property decisions.">
+</app-tools-section>

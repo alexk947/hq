@@ -1,0 +1,206 @@
+<div class="mortgage-calculator-layout" [class.schedule-visible]="showSchedule">
+  <!-- Левая колонка -->
+  <div class="left-col">
+    <ng-container *ngIf="!showSchedule; else formTemplate">
+      <div class="image-column">
+        <img src="31 rf calculator A.jpg" alt="Mortgage calculator illustration" />
+      </div>
+    </ng-container>
+  </div>
+
+  <!-- Правая колонка -->
+  <div class="right-col">
+    <ng-container *ngIf="!showSchedule; else scheduleTemplate">
+      <ng-container *ngTemplateOutlet="formTemplate"></ng-container>
+    </ng-container>
+  </div>
+</div>
+
+<!-- ========================================= -->
+<!--          ШАБЛОН ФОРМЫ (компактный)       -->
+<!-- ========================================= -->
+<ng-template #formTemplate>
+  <div class="calculator-container">
+    <div class="calculator-header">
+      <h1>Mortgage Payment Calculator</h1>
+      <p class="subtitle">Calculate your mortgage payments in Canada</p>
+    </div>
+
+    <div class="calculator-form">
+      <!-- Строка 1: Mortgage amount и Interest rate -->
+      <div class="form-row">
+        <div class="form-section">
+          <label>Mortgage amount</label>
+          <div class="input-with-currency">
+            <span class="currency">$</span>
+            <input
+              type="text"
+              class="currency-input"
+              [ngModel]="displayMortgageAmount"
+              (ngModelChange)="onMortgageAmountInput($event)"
+              (blur)="onMortgageAmountBlur()"
+              placeholder="300 000"
+            />
+          </div>
+        </div>
+        <div class="form-section">
+          <label>Interest rate</label>
+          <div class="input-with-percent">
+            <input
+              type="text"
+              class="percent-input"
+              [ngModel]="interestRateFormatted"
+              (ngModelChange)="formatInterestRateInput($event)"
+              (blur)="onInterestRateBlur()"
+              placeholder="4.590"
+            />
+            <span class="percent">%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Строка 2: Amortization years и months (стилизованные селекты) -->
+      <div class="form-row">
+        <div class="form-section compact frequency-list-box">
+          <label>Amortization years</label>
+          <select class="frequency-select" [(ngModel)]="amortizationYears" (ngModelChange)="calculate()">
+            <option *ngFor="let year of amortizationYearOptions" [value]="year">{{ year }}</option>
+          </select>
+        </div>
+        <div class="form-section compact frequency-list-box">
+          <label>Amortization months</label>
+          <select class="frequency-select" [(ngModel)]="amortizationMonths" (ngModelChange)="calculate()">
+            <option *ngFor="let month of amortizationMonthOptions" [value]="month">{{ month }}</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Строка 3: Payment frequency (уже стилизована) -->
+      <div class="form-section frequency-list-box">
+        <label>Payment frequency</label>
+        <select class="frequency-select" [(ngModel)]="paymentFrequency" (ngModelChange)="calculate()">
+          <option *ngFor="let opt of paymentFrequencyOptions" [value]="opt.value">{{ opt.label }}</option>
+        </select>
+      </div>
+
+      <!-- Строка 4: Interest type, Term years, Term months (три колонки, все стилизованы) -->
+      <div class="form-row-three">
+        <div class="form-section compact frequency-list-box">
+          <label>Interest type</label>
+          <select class="frequency-select" [(ngModel)]="interestType" (ngModelChange)="calculate()">
+            <option *ngFor="let opt of interestTypeOptions" [value]="opt.value">{{ opt.label }}</option>
+          </select>
+        </div>
+        <div class="form-section compact frequency-list-box">
+          <label>Term years</label>
+          <select class="frequency-select" [(ngModel)]="interestTermYears" (ngModelChange)="calculate()">
+            <option *ngFor="let year of interestTermYearOptions" [value]="year">{{ year }}</option>
+          </select>
+        </div>
+        <div class="form-section compact frequency-list-box">
+          <label>Term months</label>
+          <select class="frequency-select" [(ngModel)]="interestTermMonths" (ngModelChange)="calculate()">
+            <option *ngFor="let month of interestTermMonthOptions" [value]="month">{{ month }}</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Кнопка переключения графика амортизации -->
+      <button class="toggle-schedule" (click)="toggleSchedule()">
+        {{ showSchedule ? 'Hide' : 'Show' }} Amortization Schedule
+      </button>
+
+      <!-- Результаты расчёта -->
+      <div class="results-section" *ngIf="paymentResult > 0">
+        <div class="results-header">
+          <h2>Your mortgage payment</h2>
+        </div>
+
+        <div class="payment-result">
+          <div class="payment-amount">
+            {{ formatCurrency(paymentResult) }}
+            <span class="payment-frequency">per {{ getPaymentFrequencyLabel() | lowercase }}</span>
+          </div>
+        </div>
+
+        <div class="summary-grid">
+          <div class="summary-item">
+            <div class="summary-label">Total interest paid</div>
+            <div class="summary-value">{{ formatCurrency(totalInterestPaid) }}</div>
+          </div>
+          <div class="summary-item">
+            <div class="summary-label">Total cost</div>
+            <div class="summary-value">{{ formatCurrency(totalMortgageCost) }}</div>
+          </div>
+          <div class="summary-item">
+            <div class="summary-label">Term balance</div>
+            <div class="summary-value">{{ formatCurrency(termBalance) }}</div>
+          </div>
+          <div class="summary-item">
+            <div class="summary-label">Term interest paid</div>
+            <div class="summary-value">{{ formatCurrency(termInterestPaid) }}</div>
+          </div>
+        </div>
+
+        <div class="term-info">
+          <div class="term-label">Term end date</div>
+          <div class="term-date">{{ getTermEndDate() }}</div>
+        </div>
+      </div>
+
+      <!-- Сообщение об ошибке -->
+      <div class="validation-error" *ngIf="!validateInputs() && paymentResult === 0">
+        Please enter valid mortgage amount, interest rate and amortization period.
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<!-- ========================================= -->
+<!--     ШАБЛОН ТАБЛИЦЫ АМОРТИЗАЦИИ           -->
+<!-- ========================================= -->
+<ng-template #scheduleTemplate>
+  <div class="schedule-container" *ngIf="amortizationSchedule.length > 0">
+    <div class="schedule-header">
+      <h3>Amortization Schedule</h3>
+      <div class="schedule-summary">
+        Showing {{ paginatedSchedule.length }} of {{ amortizationSchedule.length }} payments
+      </div>
+    </div>
+
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Payment #</th>
+            <th>Payment</th>
+            <th>Principal</th>
+            <th>Interest</th>
+            <th>Balance</th>
+            <th>Cumulative Interest</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let payment of paginatedSchedule">
+            <td>{{ payment.paymentNumber }}</td>
+            <td>{{ formatCurrency(payment.payment) }}</td>
+            <td>{{ formatCurrency(payment.principal) }}</td>
+            <td>{{ formatCurrency(payment.interest) }}</td>
+            <td>{{ formatCurrency(payment.balance) }}</td>
+            <td>{{ formatCurrency(payment.cumulativeInterest) }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="pagination-controls" *ngIf="totalPages > 1">
+      <button (click)="prevPage()" [disabled]="schedulePage === 0">Previous</button>
+      <span>Page {{ schedulePage + 1 }} of {{ totalPages }}</span>
+      <button (click)="nextPage()" [disabled]="schedulePage === totalPages - 1">Next</button>
+    </div>
+
+    <button class="toggle-schedule" (click)="toggleSchedule()" style="margin-top: 1rem;">
+      Back to Calculator
+    </button>
+  </div>
+</ng-template>

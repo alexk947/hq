@@ -1,0 +1,145 @@
+<!-- Hero Banner Section -->
+<section class="hero-banner">
+  <img src="mortgage_broker_bg.png"
+       alt="Top Mortgage Brokers in Calgary"
+       class="hero-banner-image">
+  <div class="hero-banner-overlay">
+    <div class="hero-banner-content container">
+      <h1 class="hero-banner-title">Mortgage Brokers</h1>
+      <div class="hero-banner-subtitle">Top 3 Mortgage Brokers in Calgary — Personalized Service for Homeowners & Real Estate Investors</div>
+    </div>
+  </div>
+</section>
+
+<!-- Intro Section -->
+<section class="intro-section">
+  <div class="container">
+    <h1>Top 3 Mortgage Brokers in Calgary</h1>
+    <h2>Personalized Service for Homeowners & Real Estate Investors</h2>
+    <p>Finding the right mortgage broker in Calgary can mean the difference between a smooth purchase and a costly mistake. We focus exclusively on small, boutique mortgage experts—the kind who answer the phone themselves, give honest advice, and specialize in investment-friendly financing.</p>
+    <p>These brokers maintain exceptional online reputations, consistent 5-star reviews, and a hands-on approach. If you want personal service—not a corporate call centre—this list is for you.</p>
+  </div>
+</section>
+
+<!-- Important Note Section -->
+<section class="ready-section">
+  <div class="container">
+    <div class="important-note">
+      <strong>Important:</strong>
+      <p>Our rankings are 100% independent based on our own evaluation, research, and client feedback.</p>
+      <p>We do not receive any commissions, referral payments, or compensation from any broker listed here.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Top Brokers Section -->
+<section class="top-firms-section">
+  <div class="container">
+    <h3>Our Top Mortgage Broker Picks</h3>
+
+    <div class="intro-content">
+      <p>Each mortgage broker below has been carefully selected based on their personalized approach, deep local expertise, and proven ability to handle complex financing for both homeowners and investors.</p>
+    </div>
+
+    <div class="firm-cards-grid">
+      <!-- Broker Cards -->
+      <div class="firm-card" *ngFor="let broker of brokers; let i = index">
+        <div class="firm-header">
+          <div class="firm-name">{{broker.name}}</div>
+          <div class="firm-title">{{broker.title}}</div>
+        </div>
+
+        <div class="firm-contact">
+          <div class="contact-line">
+            <strong>Website:</strong>
+            <a [href]="broker.website" target="_blank" rel="noopener noreferrer">{{broker.website}}</a>
+          </div>
+          <div class="contact-line">
+            <strong>Phone:</strong> {{broker.phone}}
+          </div>
+          <div class="contact-line">
+            <strong>Location/Service Area:</strong> {{broker.location}}
+          </div>
+        </div>
+
+        <div class="firm-content">
+          <div class="firm-recommendation">
+            <h4>Why We Recommend {{getBrokerFirstName(broker.name)}}</h4>
+            <p>{{broker.recommendation}}</p>
+
+            <div class="services-list" *ngIf="broker.strengths.length">
+              <h5>Key Strengths:</h5>
+              <ul>
+                <li *ngFor="let strength of broker.strengths">{{strength}}</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="firm-best-for" *ngIf="broker.bestFor.length">
+            <h4>Best For:</h4>
+            <ul>
+              <li *ngFor="let item of broker.bestFor">{{item}}</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Visual divider between cards -->
+        <div class="card-divider" *ngIf="i < brokers.length - 1"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Selection Criteria Section -->
+<section class="why-section">
+  <div class="container">
+    <h2>⭐ How We Chose These Mortgage Brokers</h2>
+    <p>We apply strict criteria to ensure quality, trust, and relevance for our users:</p>
+
+    <div class="benefits-grid">
+      <div class="benefit-item" *ngFor="let criterion of selectionCriteria">
+        <h3>{{criterion.title}}</h3>
+        <p>{{criterion.description}}</p>
+      </div>
+    </div>
+
+    <div class="warning-section" style="border-left-color: #10B981; background: #f0fdf4;">
+      <h3>📌 Important to Know</h3>
+      <p><strong>No broker pays to be listed here.</strong> This page exists to help Calgary homeowners & investors make informed decisions.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Why Boutique Brokers Matter -->
+<section class="why-section" style="background: var(--white);">
+  <div class="container">
+    <h2>Why Boutique Mortgage Brokers Are Better for Calgary Investors</h2>
+    <p>Large corporate brokerages can be slow, impersonal, and inconsistent. Boutique brokers excel because they offer:</p>
+
+    <div class="benefits-grid">
+      <div class="benefit-item" *ngFor="let advantage of boutiqueAdvantages">
+        <h3>{{advantage}}</h3>
+        <p>{{getAdvantageDescription(advantage)}}</p>
+      </div>
+    </div>
+
+    <p style="text-align: center; margin-top: 40px; font-style: italic; color: var(--text-secondary);">
+      Your financing strategy matters just as much as your property—especially in a changing Calgary market.
+    </p>
+  </div>
+</section>
+
+<!-- Ready to Get Started Section -->
+<section class="ready-section">
+  <div class="container">
+    <h2>🚀 Ready to Get Started?</h2>
+    <p>Our top picks are chosen independently and without compensation, so you can feel confident contacting any broker on this list.</p>
+    <p class="highlighted-text">Then return to our free tools. Before you sign anything, evaluate your deal with precision.</p>
+  </div>
+</section>
+
+<!-- Tools Section -->
+<app-tools-section
+  title="🔧 Our Most Popular Free Tools (Investor-Focused)"
+  description="Analyze your investment strategy with precision using our specialized calculators.">
+</app-tools-section>

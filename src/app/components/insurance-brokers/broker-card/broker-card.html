@@ -1,0 +1,43 @@
+<!-- components/insurance-brokers/broker-card/broker-card.component.html -->
+<div class="broker-card">
+  <div class="broker-header">
+    <div class="broker-name">{{ broker.name }}</div>
+    <div class="broker-title">{{ broker.title }}</div>
+  </div>
+  
+  <div class="broker-contact">
+    <div class="contact-line">
+      <strong>Website:</strong> 
+      <a [href]="broker.website" target="_blank">{{ broker.website }}</a>
+    </div>
+    <div class="contact-line">
+      <strong>Phone:</strong> {{ broker.phone }}
+    </div>
+    <div class="contact-line">
+      <strong>Address:</strong> {{ broker.address }}
+    </div>
+  </div>
+  
+  <div class="broker-content">
+    <div class="broker-recommendation">
+      <h4>Why We Recommend {{ broker.name }}</h4>
+      <p>{{ broker.recommendation }}</p>
+      
+      <div class="coverage-list" *ngIf="broker.coverageAreas && broker.coverageAreas.length > 0">
+        <h5>Specialized Coverage Areas:</h5>
+        <ul>
+          <li *ngFor="let area of broker.coverageAreas">{{ area }}</li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="broker-best-for">
+      <h4>Best For:</h4>
+      <ul>
+        <li *ngFor="let item of broker.bestFor">{{ item }}</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="card-divider" *ngIf="showDivider"></div>

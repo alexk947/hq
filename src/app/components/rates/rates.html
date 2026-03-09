@@ -1,0 +1,11 @@
+<!-- rates.component.html -->
+<section id="mortgage-rates" #ratesSection class="container rates-section">
+  <h2>Today's Best Mortgage Rates in Calgary</h2>
+  <div class="rates-grid">
+    <div class="rate-card" *ngFor="let rate of rates">
+      <div class="rate-type">{{ rate.type }}</div>
+      <div class="rate-value">{{ rate.value }}</div>
+      <button class="button-secondary">Get Rate</button>
+    </div>
+  </div>
+</section>

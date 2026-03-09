@@ -1,0 +1,456 @@
+// choose-realtor-guide.scss
+/* Hero Banner Section */
+.hero-banner {
+  position: relative;
+  height: 400px;
+  overflow: hidden;
+  margin-bottom: 60px;
+  
+  &-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  &-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3));
+    display: flex;
+    align-items: center;
+  }
+  
+  &-content {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 var(--page-padding);
+    width: 100%;
+  }
+  
+  &-title {
+    font-size: 64px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 16px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    letter-spacing: -0.5px;
+  }
+  
+  &-subtitle {
+    font-size: 24px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 600px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  }
+}
+
+/* Guide Intro Section */
+.guide-intro-section {
+  padding: 0 0 60px 0;
+  
+  .guide-content {
+    max-width: 800px;
+    margin: 0 auto;
+    
+    p {
+      font-size: var(--body-large-size);
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+      line-height: 1.6;
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+/* Guide Content Section */
+.guide-content-section {
+  padding-bottom: 80px;
+  
+  .guide-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+}
+
+/* Guide Section */
+.guide-section {
+  margin-bottom: 60px;
+  padding: 40px;
+  background: var(--white);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  
+  h2 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    color: var(--text-primary);
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--border);
+  }
+  
+  h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 30px 0 16px 0;
+    color: var(--primary);
+  }
+  
+  p {
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+  
+  .sub-section-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 24px 0 12px 0;
+    color: var(--primary);
+  }
+}
+
+/* Lists */
+.do-list, .dont-list {
+  margin: 20px 0;
+  padding-left: 24px;
+  
+  li {
+    margin-bottom: 12px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    position: relative;
+  }
+}
+
+.do-list li:before {
+  content: "✓";
+  color: var(--success);
+  font-weight: bold;
+  position: absolute;
+  left: -24px;
+}
+
+.dont-list li:before {
+  content: "✗";
+  color: var(--danger);
+  font-weight: bold;
+  position: absolute;
+  left: -24px;
+}
+
+/* Step Cards */
+.step-card {
+  background: #F0F9FF;
+  border-left: 4px solid var(--primary);
+  padding: 24px;
+  border-radius: 8px;
+  margin: 24px 0;
+  
+  h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: var(--primary);
+  }
+  
+  .sub-section-title {
+    margin-top: 24px;
+  }
+}
+
+/* Question Cards */
+.question-card {
+  background: var(--bg-light);
+  border: 1px solid var(--border);
+  padding: 20px;
+  border-radius: 8px;
+  margin: 20px 0;
+  
+  h4 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--text-primary);
+  }
+  
+  p {
+    margin-bottom: 16px;
+  }
+  
+  .risk-note {
+    color: var(--danger);
+    font-weight: 600;
+    margin-top: 12px;
+  }
+  
+  .normal-note {
+    color: var(--text-secondary);
+    margin-top: 12px;
+    font-weight: 500;
+  }
+}
+
+/* Warning Box */
+.warning-box {
+  background: #FEF2F2;
+  border-left: 4px solid var(--danger);
+  padding: 20px;
+  border-radius: 8px;
+  margin: 24px 0;
+  
+  h3 {
+    color: var(--danger);
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+  
+  h4 {
+    color: var(--danger);
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+  
+  p {
+    color: #7F1D1D;
+    margin-bottom: 16px;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  
+  .warning-note {
+    margin-top: 16px;
+    color: #7F1D1D;
+    font-weight: 500;
+  }
+}
+
+/* Success Box */
+.success-box {
+  background: #F0FDF4;
+  border-left: 4px solid var(--success);
+  padding: 20px;
+  border-radius: 8px;
+  margin: 24px 0;
+  
+  h3 {
+    color: var(--success);
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+  
+  h4 {
+    color: var(--success);
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+  
+  p {
+    color: #14532D;
+    margin-bottom: 16px;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+/* Checklist */
+.checklist {
+  background: #F0FDF4;
+  padding: 24px;
+  border-radius: 8px;
+  margin: 30px 0;
+  border: 1px solid #BBF7D0;
+  
+  h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: var(--success);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    
+    &:before {
+      content: "✓";
+      font-weight: bold;
+    }
+  }
+  
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  li {
+    margin-bottom: 12px;
+    color: var(--text-secondary);
+    padding-left: 28px;
+    position: relative;
+    line-height: 1.5;
+    
+    &:before {
+      content: "✓";
+      color: var(--success);
+      font-weight: bold;
+      position: absolute;
+      left: 0;
+    }
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  
+  .checklist-conclusion {
+    margin-top: 20px;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+}
+
+/* Callout Box */
+.callout-box {
+  background: linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 100%);
+  border: 1px solid #BAE6FD;
+  padding: 32px;
+  border-radius: 12px;
+  margin: 40px 0;
+  text-align: center;
+  
+  h3 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: var(--text-primary);
+  }
+  
+  p {
+    font-size: var(--body-large-size);
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto 24px;
+  }
+  
+  .button-primary {
+    display: inline-block;
+    margin-top: 16px;
+  }
+  
+  &.final-callout {
+    margin-top: 60px;
+  }
+}
+
+/* Comparison Grid */
+.comparison-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  max-width: 600px;
+  margin: 20px auto 0;
+  
+  .comparison-item {
+    .success-box,
+    .warning-box {
+      background: transparent;
+      border-left: none;
+      padding: 0;
+      margin: 0;
+    }
+  }
+}
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+  .hero-banner-title {
+    font-size: 48px;
+  }
+  
+  .hero-banner-subtitle {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-banner {
+    height: 300px;
+    margin-bottom: 40px;
+  }
+  
+  .hero-banner-title {
+    font-size: 36px;
+  }
+  
+  .hero-banner-subtitle {
+    font-size: 18px;
+  }
+  
+  .guide-intro-section {
+    padding-bottom: 40px;
+  }
+  
+  .guide-section {
+    padding: 24px;
+    
+    h2 {
+      font-size: 24px;
+    }
+  }
+  
+  .comparison-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  
+  .callout-box {
+    padding: 24px;
+  }
+  
+  .guide-content-section {
+    padding-bottom: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-banner {
+    height: 250px;
+    margin-bottom: 30px;
+  }
+  
+  .hero-banner-title {
+    font-size: 32px;
+  }
+  
+  .hero-banner-subtitle {
+    font-size: 16px;
+  }
+  
+  .guide-section {
+    padding: 20px;
+    
+    h2 {
+      font-size: 22px;
+    }
+  }
+  
+  .step-card,
+  .question-card,
+  .warning-box,
+  .success-box,
+  .checklist {
+    padding: 16px;
+  }
+}

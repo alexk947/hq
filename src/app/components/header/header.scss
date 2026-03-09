@@ -1,0 +1,230 @@
+:host {
+  display: block;
+}
+
+.header {
+  height: 96px;
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  
+  &-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 var(--page-padding);
+  }
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.logo a {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.logo-svg {
+  height: 40px;        /* реальный размер логотипа */
+  width: auto;
+  display: block;
+  cursor: pointer;
+}
+
+.nav {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  
+  & ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 48px; /* Увеличенное расстояние между элементами */
+  }
+  
+  & li {
+    position: relative;
+  }
+  
+  & a {
+    text-decoration: none;
+    color: var(--text-primary);
+    font-weight: 600; /* Полужирный шрифт для лучшей видимости */
+    font-size: 23px; /* Увеличенный размер шрифта */
+    letter-spacing: 0.5px; /* Небольшой кернинг для лучшей читаемости */
+    padding: 8px 0;
+    position: relative;
+    transition: all 0.3s ease;
+    // text-transform: uppercase; /* Заглавные буквы для лучшей читаемости */
+    
+    &:hover {
+      color: var(--primary);
+      
+      &::after {
+        width: 100%;
+      }
+    }
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--primary);
+      transition: width 0.3s ease;
+    }
+  }
+}
+
+/* Активное состояние ссылки (если нужно) */
+.nav a.active {
+  color: var(--primary);
+  
+  &::after {
+    width: 100%;
+  }
+}
+
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 28px; /* Увеличен размер для мобильных */
+  cursor: pointer;
+  color: var(--text-primary);
+  padding: 8px;
+  z-index: 101;
+}
+
+.header-cta {
+  flex-shrink: 0;
+}
+
+.button-primary {
+  background: var(--primary);
+  color: var(--white);
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  
+  &:hover {
+    background: var(--primary-hover);
+  }
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .nav {
+    & ul {
+      gap: 32px; /* Уменьшаем расстояние на планшетах */
+    }
+    
+    & a {
+      font-size: 16px; /* Немного меньше на планшетах */
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .header-container {
+    position: relative;
+  }
+  
+  .mobile-menu-btn {
+    display: block;
+  }
+  
+  .nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 24px var(--page-padding);
+    display: none;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    
+    &.active {
+      display: block;
+    }
+    
+    & ul {
+      flex-direction: column;
+      gap: 20px; /* Сохраняем хорошее расстояние и в мобильном меню */
+      align-items: center;
+    }
+    
+    & a {
+      font-size: 20px; /* Крупный текст в мобильном меню */
+      font-weight: 600;
+      text-align: center;
+      display: block;
+      padding: 12px 0;
+      width: 100%;
+      border-bottom: 1px solid var(--border-light);
+      
+      &:last-child {
+        border-bottom: none;
+      }
+      
+      &:hover {
+        background-color: var(--bg-light);
+      }
+      
+      &::after {
+        display: none; /* Убираем подчеркивание в мобильном меню */
+      }
+    }
+  }
+  
+  .header-cta {
+    display: none;
+  }
+  
+  .logo-svg {
+    height: 36px; /* Немного меньше логотип на мобильных */
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    height: 80px; /* Меньше высота на маленьких экранах */
+  }
+  
+  .nav {
+    padding: 20px var(--page-padding);
+    
+    & a {
+      font-size: 18px;
+      padding: 10px 0;
+    }
+    
+    & ul {
+      gap: 16px;
+    }
+  }
+  
+  .mobile-menu-btn {
+    font-size: 24px;
+  }
+}

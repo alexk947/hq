@@ -1,0 +1,267 @@
+<!-- Hero Banner Section -->
+<section class="hero-banner">
+  <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80" 
+       alt="HomeIQ for Realtors" 
+       class="hero-banner-image">
+  <div class="hero-banner-overlay">
+    <div class="hero-banner-content container">
+      <h1 class="hero-banner-title">For Realtors</h1>
+      <div class="hero-banner-subtitle">Personalized Support Beyond Closing — Without Added Risk or Pressure</div>
+    </div>
+  </div>
+</section>
+
+<!-- Intro Section -->
+<section class="intro-section">
+  <div class="container">
+    <h1>Personalized Support Beyond Closing</h1>
+    <h2>Without Added Risk or Pressure</h2>
+    <p>Buying or selling a home doesn't end at possession. After the keys are handed over, homeowners have questions about maintenance, repairs, insurance, legal fees, home systems, trades, renovations, and "what do I do now?"</p>
+    <p>Realtors want to help — but recommending the wrong service or giving advice outside their role can create risk. HomeIQ exists to solve this — cleanly and transparently.</p>
+  </div>
+</section>
+
+<!-- What Is HomeIQ Section -->
+<section class="content-section bg-light">
+  <div class="container">
+    <div class="section-header">
+      <h2>What HomeIQ Is</h2>
+      <p class="section-subtitle">HomeIQ is an independent real estate education platform based in Calgary.</p>
+    </div>
+    
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <div class="benefit-icon">🏠</div>
+        <h3>Independent Platform</h3>
+        <p>We are not a brokerage. We do not sell real estate. We do not rank or review realtors.</p>
+      </div>
+      
+      <div class="benefit-card">
+        <div class="benefit-icon">📚</div>
+        <h3>Education & Guidance</h3>
+        <p>We help homeowners understand mortgages, legal fees, insurance, and ownership with neutral guidance.</p>
+      </div>
+      
+      <div class="benefit-card">
+        <div class="benefit-icon">🎯</div>
+        <h3>Post-Closing Support</h3>
+        <p>We navigate post-closing decisions with confidence and provide support for "everything after possession".</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Personalized Portal Section -->
+<section class="content-section">
+  <div class="container">
+    <div class="section-header">
+      <h2>A Personal HomeIQ Page — Built for Your Realtor</h2>
+      <p class="section-subtitle">Each Realtor can optionally share a personalized HomeIQ portal with clients.</p>
+    </div>
+    
+    <div class="portal-example">
+      <div class="portal-card">
+        <div class="portal-url">
+          <span class="url-prefix">👉 www.home-iq.ca/</span>
+          <span class="url-name">John_Smith_REMAX</span>
+        </div>
+        
+        <div class="portal-features">
+          <h3>This page:</h3>
+          <ul>
+            <li>Is dedicated to that Realtor's clients</li>
+            <li>Becomes their "after closing" destination</li>
+            <li>Keeps education and support centralized</li>
+            <li>Avoids risky one-off recommendations</li>
+          </ul>
+          
+          <div class="portal-note">
+            <p><strong>Think of it as:</strong> A clean, professional hand-off — not a referral list.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why This Works Section -->
+<section class="content-section bg-light">
+  <div class="container">
+    <div class="two-column-layout">
+      <div class="column">
+        <h2>For Realtors: Why This Works</h2>
+        <p>Realtors already do an excellent job with negotiation, pricing strategy, and market expertise. HomeIQ supports what comes after — without replacing you.</p>
+        
+        <div class="benefits-list">
+          <h3>Benefits for Realtors:</h3>
+          <ul>
+            <li>One safe link instead of dozens of recommendations</li>
+            <li>Less follow-up stress</li>
+            <li>Reduced liability exposure</li>
+            <li>A better long-term client experience</li>
+          </ul>
+        </div>
+        
+        <div class="highlight-box">
+          <p><strong>You stay visible.</strong> <strong>You stay trusted.</strong> <strong>You stay in control of the relationship.</strong></p>
+        </div>
+      </div>
+      
+      <div class="column">
+        <div class="relationship-benefits">
+          <h2>Why This Strengthens Relationships</h2>
+          <p>When homeowners feel informed:</p>
+          
+          <div class="impact-grid">
+            <div class="impact-item">
+              <div class="impact-icon">📉</div>
+              <h3>Anxiety Drops</h3>
+              <p>Informed clients have fewer worries and questions</p>
+            </div>
+            
+            <div class="impact-item">
+              <div class="impact-icon">✅</div>
+              <h3>Mistakes Decrease</h3>
+              <p>Better understanding leads to smarter decisions</p>
+            </div>
+            
+            <div class="impact-item">
+              <div class="impact-icon">💪</div>
+              <h3>Trust Increases</h3>
+              <p>That trust reflects back on the Realtor who guided them</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Form Section -->
+<section class="contact-section">
+  <div class="container">
+    <div class="section-header">
+      <h2>Get Your Personalized Portal</h2>
+      <p class="section-subtitle">If you're a Realtor and want a personalized HomeIQ portal for your clients, it starts with a conversation.</p>
+    </div>
+    
+    <div class="contact-form-container">
+      <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="contact-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="firstName">First Name *</label>
+            <input 
+              type="text" 
+              id="firstName" 
+              formControlName="firstName"
+              [class.error]="contactForm.get('firstName')?.invalid && contactForm.get('firstName')?.touched">
+            <div class="error-message" *ngIf="contactForm.get('firstName')?.invalid && contactForm.get('firstName')?.touched">
+              Please enter your first name
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="lastName">Last Name *</label>
+            <input 
+              type="text" 
+              id="lastName" 
+              formControlName="lastName"
+              [class.error]="contactForm.get('lastName')?.invalid && contactForm.get('lastName')?.touched">
+            <div class="error-message" *ngIf="contactForm.get('lastName')?.invalid && contactForm.get('lastName')?.touched">
+              Please enter your last name
+            </div>
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label for="email">Email Address *</label>
+            <input 
+              type="email" 
+              id="email" 
+              formControlName="email"
+              [class.error]="contactForm.get('email')?.invalid && contactForm.get('email')?.touched">
+            <div class="error-message" *ngIf="contactForm.get('email')?.invalid && contactForm.get('email')?.touched">
+              Please enter a valid email address
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input 
+              type="tel" 
+              id="phone" 
+              formControlName="phone"
+              placeholder="(403) 555-0123">
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="brokerage">Brokerage / Company *</label>
+          <input 
+            type="text" 
+            id="brokerage" 
+            formControlName="brokerage"
+            placeholder="e.g., RE/MAX, Century 21, etc."
+            [class.error]="contactForm.get('brokerage')?.invalid && contactForm.get('brokerage')?.touched">
+          <div class="error-message" *ngIf="contactForm.get('brokerage')?.invalid && contactForm.get('brokerage')?.touched">
+            Please enter your brokerage or company name
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="experience">Years of Experience</label>
+          <select id="experience" formControlName="experience">
+            <option value="">Select your experience</option>
+            <option value="0-2">0-2 years</option>
+            <option value="3-5">3-5 years</option>
+            <option value="6-10">6-10 years</option>
+            <option value="10+">10+ years</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="message">Message *</label>
+          <textarea 
+            id="message" 
+            formControlName="message" 
+            rows="4"
+            placeholder="Tell us about your needs and how we can help..."
+            [class.error]="contactForm.get('message')?.invalid && contactForm.get('message')?.touched"></textarea>
+          <div class="error-message" *ngIf="contactForm.get('message')?.invalid && contactForm.get('message')?.touched">
+            Please enter your message
+          </div>
+        </div>
+        
+        <div class="form-group checkbox-group">
+          <input 
+            type="checkbox" 
+            id="newsletter" 
+            formControlName="newsletter">
+          <label for="newsletter">
+            I'd like to receive updates and tips for Realtors
+          </label>
+        </div>
+        
+        <div class="form-submit">
+          <button 
+            type="submit" 
+            class="button-primary button-large"
+            [disabled]="contactForm.invalid || isSubmitting">
+            {{ isSubmitting ? 'Sending...' : 'Send Message' }}
+          </button>
+          
+          <p class="form-note">We'll respond within 24-48 business hours.</p>
+        </div>
+      </form>
+      
+      <!-- Success Message -->
+      <div class="success-message" *ngIf="isSuccess">
+        <div class="success-icon">✅</div>
+        <h3>Message Sent Successfully!</h3>
+        <p>Thank you for your interest, {{ contactForm.value.firstName }}! We've received your message and will get back to you within 24-48 business hours.</p>
+        <button class="button-secondary" (click)="resetForm()">Send Another Message</button>
+      </div>
+    </div>
+  </div>
+</section>

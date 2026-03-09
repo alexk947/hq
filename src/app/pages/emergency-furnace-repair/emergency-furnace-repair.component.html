@@ -1,0 +1,126 @@
+<!-- Hero Banner Section -->
+<section class="hero-banner">
+  <img src="emergency_furnace_repair.png" 
+       alt="Emergency Furnace Repair in Calgary" 
+       class="hero-banner-image">
+  <div class="hero-banner-overlay">
+    <div class="hero-banner-content container">
+      <h1 class="hero-banner-title">Emergency Furnace Repair</h1>
+      <div class="hero-banner-subtitle">Top 3 Emergency Furnace Repair in Calgary – Fast, Reliable Help for Homeowners & Investors</div>
+    </div>
+  </div>
+</section>
+
+<!-- Intro Section -->
+<section class="intro-section">
+  <div class="container">
+    <h1>Top 3 Emergency Furnace Repair in Calgary</h1>
+    <h2>Fast, Reliable Help for Homeowners & Investors</h2>
+    <p>When your furnace stops working in Calgary, it's not just inconvenient—it can become a property emergency. For homeowners, no-heat situations can quickly create safety risks and damage (freezing pipes). For investors and landlords, a furnace failure can trigger urgent tenant issues, potential habitability concerns, and costly downtime if the problem isn't handled immediately.</p>
+    <p>We highlight reputable HVAC companies known for responsive emergency support, strong diagnostics, and code-compliant repairs. If you want fast action and clear communication—not excuses—this list is for you.</p>
+  </div>
+</section>
+
+<!-- Important Note Section -->
+<section class="ready-section">
+  <div class="container">
+    <div class="important-note">
+      <strong>Important:</strong>
+      <p>Our rankings are 100% independent, based on our own evaluation, research, and client feedback.</p>
+      <p>We do not receive commissions, referral fees, or any form of compensation from the companies listed here.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Top Furnace Repair Companies Section -->
+<section class="top-firms-section">
+  <div class="container">
+    <h3>Our Top Emergency Furnace Repair Company Picks</h3>
+    
+    <div class="intro-content">
+      <p>Each furnace repair company below has been carefully selected based on their emergency response time, reliability, and proven track record in Calgary's demanding climate.</p>
+    </div>
+    
+    <div class="firm-cards-grid">
+      <!-- Company Cards -->
+      <div class="firm-card" *ngFor="let company of companies; let i = index">
+        <div class="firm-header">
+          <div class="firm-name">{{company.name}}</div>
+          <div class="firm-title">{{company.title}}</div>
+        </div>
+        
+        <div class="firm-contact">
+          <div class="contact-line">
+            <strong>Website:</strong> 
+            <a [href]="company.website" target="_blank" rel="noopener noreferrer">{{company.website}}</a>
+          </div>
+          <div class="contact-line">
+            <strong>Phone:</strong> {{company.phone}}
+          </div>
+          <div class="contact-line">
+            <strong>Location:</strong> {{company.location}}
+          </div>
+        </div>
+        
+        <div class="firm-content">
+          <div class="firm-recommendation">
+            <h4>Why We Recommend {{company.name.split(' ')[0]}}</h4>
+            <p>{{company.recommendation}}</p>
+            
+            <div class="services-list" *ngIf="company.services.length">
+              <h5>Services Offered:</h5>
+              <ul>
+                <li *ngFor="let service of company.services">{{service}}</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="firm-best-for" *ngIf="company.bestFor.length">
+            <h4>Best For:</h4>
+            <ul>
+              <li *ngFor="let item of company.bestFor">{{item}}</li>
+            </ul>
+          </div>
+        </div>
+        
+        <!-- Visual divider between cards -->
+        <div class="card-divider" *ngIf="i < companies.length - 1"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why Companies Matter Section -->
+<section class="why-section">
+  <div class="container">
+    <h2>What Choosing the Right or Wrong Emergency Furnace Company Does to Your Property</h2>
+    <p>The right emergency furnace company doesn't just "get heat back on"—they reduce risk. A strong HVAC team will:</p>
+    
+    <div class="benefits-grid">
+      <div class="benefit-item" *ngFor="let benefit of benefits">
+        <h3>{{benefit}}</h3>
+        <p>{{getBenefitDescription(benefit)}}</p>
+      </div>
+    </div>
+    
+    <div class="warning-section">
+      <h3>⚠️ The Risk of Wrong Furnace Company</h3>
+      <p>The wrong provider can turn a small issue into a bigger one: repeat callouts, unnecessary part replacements, poor workmanship, and extended no-heat downtime—especially expensive for rentals.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Ready to Get Started Section -->
+<section class="ready-section">
+  <div class="container">
+    <h2>🚀 Ready to Get Started?</h2>
+    <p>Our top picks are selected independently and without compensation, so you can feel confident reaching out to any professional on this list.</p>
+    <p class="highlighted-text">Then return to our free tools. Before approving repairs or replacement quotes, validate the numbers with precision using our calculators:</p>
+  </div>
+</section>
+
+<!-- Tools Section -->
+<app-tools-section   
+  title="🔧 Our Most Popular Free Tools"
+  description="Investor-focused & homeowner-friendly tools to make smarter property decisions.">
+</app-tools-section>

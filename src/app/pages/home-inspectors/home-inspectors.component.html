@@ -1,0 +1,126 @@
+<!-- Hero Banner Section -->
+<section class="hero-banner">
+  <img src="home_inspectors_bg02.png" 
+       alt="Top Home Inspectors in Calgary" 
+       class="hero-banner-image">
+  <div class="hero-banner-overlay">
+    <div class="hero-banner-content container">
+      <h1 class="hero-banner-title">Home Inspectors</h1>
+      <div class="hero-banner-subtitle">Top 3 Home Inspectors in Calgary – Trusted Experts for Homeowners & Investors</div>
+    </div>
+  </div>
+</section>
+
+<!-- Intro Section -->
+<section class="intro-section">
+  <div class="container">
+    <h1>Top 3 Home Inspectors in Calgary</h1>
+    <h2>Trusted Experts for Homeowners & Investors</h2>
+    <p>A high-quality home inspection is one of the most important steps in protecting your financial investment—whether you're buying your first home or adding another rental property to your portfolio. The right home inspector can uncover hidden issues, prevent costly surprises, and help you negotiate repairs or price adjustments before closing.</p>
+    <p>We highlight Calgary home inspectors with strong reviews, proven experience, excellent communication, and consistent reporting accuracy. These inspectors are known for reliability, detailed reporting, and investor-friendly analysis.</p>
+  </div>
+</section>
+
+<!-- Important Note Section -->
+<section class="ready-section">
+  <div class="container">
+    <div class="important-note">
+      <strong>Important:</strong>
+      <p>Our rankings are completely independent, based on research, evaluation, and client feedback.</p>
+      <p>We do not receive commissions or compensation from any inspector listed here.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Top Home Inspectors Section -->
+<section class="top-firms-section">
+  <div class="container">
+    <h3>Our Top Home Inspector Picks</h3>
+    
+    <div class="intro-content">
+      <p>Each home inspector below has been carefully selected based on their expertise, thoroughness, and proven ability to identify both immediate concerns and long-term maintenance issues.</p>
+    </div>
+    
+    <div class="firm-cards-grid">
+      <!-- Inspector Cards -->
+      <div class="firm-card" *ngFor="let inspector of inspectors; let i = index">
+        <div class="firm-header">
+          <div class="firm-name">{{inspector.name}}</div>
+          <div class="firm-title">{{inspector.title}}</div>
+        </div>
+        
+        <div class="firm-contact">
+          <div class="contact-line">
+            <strong>Website:</strong> 
+            <a [href]="inspector.website" target="_blank" rel="noopener noreferrer">{{inspector.website}}</a>
+          </div>
+          <div class="contact-line">
+            <strong>Phone:</strong> {{inspector.phone}}
+          </div>
+          <div class="contact-line">
+            <strong>Location:</strong> {{inspector.location}}
+          </div>
+        </div>
+        
+        <div class="firm-content">
+          <div class="firm-recommendation">
+            <h4>Why We Recommend {{getInspectorShortName(inspector.name)}}</h4>
+            <p>{{inspector.recommendation}}</p>
+            
+            <div class="services-list" *ngIf="inspector.technologies.length">
+              <h5>Tools & Technologies:</h5>
+              <ul>
+                <li *ngFor="let tech of inspector.technologies">{{tech}}</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="firm-best-for" *ngIf="inspector.bestFor.length">
+            <h4>Best For:</h4>
+            <ul>
+              <li *ngFor="let item of inspector.bestFor">{{item}}</li>
+            </ul>
+          </div>
+        </div>
+        
+        <!-- Visual divider between cards -->
+        <div class="card-divider" *ngIf="i < inspectors.length - 1"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why Inspectors Matter Section -->
+<section class="why-section">
+  <div class="container">
+    <h2>Why the Right Home Inspector Matters</h2>
+    <p>A home inspection is more than a checklist—it is your last line of defense before committing hundreds of thousands of dollars. A strong inspector can:</p>
+    
+    <div class="benefits-grid">
+      <div class="benefit-item" *ngFor="let benefit of inspectorBenefits">
+        <h3>{{benefit}}</h3>
+        <p>{{getBenefitDescription(benefit)}}</p>
+      </div>
+    </div>
+    
+    <div class="warning-section">
+      <h3>⚠️ The Risk of Wrong Home Inspector</h3>
+      <p>The wrong inspector can miss critical details that lead to unexpected expenses, safety issues, and reduced property value. Protecting your investment starts with choosing the right expert.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Ready to Get Started Section -->
+<section class="ready-section">
+  <div class="container">
+    <h2>🚀 Ready to Get Started?</h2>
+    <p>Contact any of the trusted home inspectors above with confidence—our recommendations are fully independent.</p>
+    <p class="highlighted-text">Once your inspection is complete, return to our website to analyze your numbers with precision:</p>
+  </div>
+</section>
+
+<!-- Tools Section -->
+<app-tools-section   
+  title="🔧 Popular Tools for Homeowners & Investors"
+  description="Use our tools to make smarter, more confident real-estate decisions—before you commit to any property.">
+</app-tools-section>

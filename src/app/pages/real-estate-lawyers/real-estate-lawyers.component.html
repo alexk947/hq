@@ -1,0 +1,126 @@
+<!-- Hero Banner Section -->
+<section class="hero-banner">
+  <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80"
+       alt="Top Real Estate Lawyers in Calgary"
+       class="hero-banner-image">
+  <div class="hero-banner-overlay">
+    <div class="hero-banner-content container">
+      <h1 class="hero-banner-title">Real Estate Lawyers</h1>
+      <div class="hero-banner-subtitle">Top 3 Real Estate Lawyers in Calgary – Trusted Legal Experts for Homeowners & Investors</div>
+    </div>
+  </div>
+</section>
+
+<!-- Intro Section -->
+<section class="intro-section">
+  <div class="container">
+    <h1>Top 3 Real Estate Lawyers in Calgary</h1>
+    <h2>Trusted Legal Experts for Homeowners & Investors</h2>
+    <p>A real estate lawyer plays a critical role in protecting your finances, your property, and your long-term peace of mind. Whether you're buying your first home, refinancing, adding a secondary suite, or purchasing an investment property, the lawyer you choose directly affects your experience, your risk exposure, and even how fast your deal closes.</p>
+    <p>We recommend only experienced, hands-on Calgary real estate lawyers—professionals who communicate clearly, respond quickly, and guide you through every step of the transaction. No large law-firm call centres. No layers of assistants. Just real lawyers providing real expertise when it matters most.</p>
+  </div>
+</section>
+
+<!-- Important Note Section -->
+<section class="ready-section">
+  <div class="container">
+    <div class="important-note">
+      <strong>Important:</strong>
+      <p>Our rankings are completely independent, based on our research, evaluation, and client feedback.</p>
+      <p>We do not receive commissions or compensation from any law firm listed here.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Top Lawyers Section -->
+<section class="top-firms-section">
+  <div class="container">
+    <h3>Our Top Real Estate Lawyer Picks</h3>
+
+    <div class="intro-content">
+      <p>Each real estate lawyer below has been carefully selected based on their expertise, reliability, and proven ability to handle both residential and investment property transactions with personalized attention.</p>
+    </div>
+
+    <div class="firm-cards-grid">
+      <!-- Lawyer Cards -->
+      <div class="firm-card" *ngFor="let lawyer of lawyers; let i = index">
+        <div class="firm-header">
+          <div class="firm-name">{{lawyer.name}}</div>
+          <div class="firm-title">{{lawyer.title}}</div>
+        </div>
+
+        <div class="firm-contact">
+          <div class="contact-line">
+            <strong>Website:</strong>
+            <a [href]="lawyer.website" target="_blank" rel="noopener noreferrer">{{lawyer.website}}</a>
+          </div>
+          <div class="contact-line">
+            <strong>Phone:</strong> {{lawyer.phone}}
+          </div>
+          <div class="contact-line">
+            <strong>Location:</strong> {{lawyer.location}}
+          </div>
+        </div>
+
+        <div class="firm-content">
+          <div class="firm-recommendation">
+            <h4>Why We Recommend {{getLawyerFirstName(lawyer.name)}}</h4>
+            <p>{{lawyer.recommendation}}</p>
+
+            <div class="services-list" *ngIf="lawyer.specialties.length">
+              <h5>Key Specialties:</h5>
+              <ul>
+                <li *ngFor="let specialty of lawyer.specialties">{{specialty}}</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="firm-best-for" *ngIf="lawyer.bestFor.length">
+            <h4>Best For:</h4>
+            <ul>
+              <li *ngFor="let item of lawyer.bestFor">{{item}}</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Visual divider between cards -->
+        <div class="card-divider" *ngIf="i < lawyers.length - 1"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why Lawyers Matter Section -->
+<section class="why-section">
+  <div class="container">
+    <h2>Why the Right Real Estate Lawyer Matters</h2>
+    <p>A real estate lawyer does far more than sign documents—they protect you from risk, hidden obligations, unexpected costs, and potential legal disputes. A good lawyer will:</p>
+
+    <div class="benefits-grid">
+      <div class="benefit-item" *ngFor="let benefit of lawyerBenefits">
+        <h3>{{benefit}}</h3>
+        <p>{{getBenefitDescription(benefit)}}</p>
+      </div>
+    </div>
+
+    <div class="warning-section">
+      <h3>⚠️ The Risk of Wrong Legal Representation</h3>
+      <p>The wrong lawyer can create stress, delays, and costly mistakes that may affect your home, your financing, or your ability to close on time. Real estate is too valuable to trust to an inexperienced or inattentive legal team.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Ready to Get Started Section -->
+<section class="ready-section">
+  <div class="container">
+    <h2>🚀 Ready to Get Started?</h2>
+    <p>Reach out to any of the trusted real estate lawyers above with confidence—these recommendations are completely independent and based on quality, service, and client outcomes.</p>
+    <p class="highlighted-text">Once your legal review begins, return to our site to run your numbers with precision:</p>
+  </div>
+</section>
+
+<!-- Tools Section -->
+<app-tools-section
+  title="🔧 Popular Tools for Homeowners & Investors"
+  description="Make more confident real estate decisions with our specialized calculators and analysis tools.">
+</app-tools-section>

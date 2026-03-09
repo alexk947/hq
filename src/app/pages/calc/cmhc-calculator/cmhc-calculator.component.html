@@ -1,0 +1,140 @@
+<!-- cmhc-calculator.component.html -->
+<div class="calculator-container">
+  <h2>Mortgage Default Insurance (CMHC) Calculator</h2>
+  <p class="description">Put in an asking price and down payment amount and it'll estimate your mortgage insurance premium.</p>
+
+  <!-- Input Section -->
+  <div class="input-section">
+    <div class="input-group">
+      <label for="askingPrice">Asking Price</label>
+      <div class="input-container">
+        <span class="currency-symbol">$</span>
+        <input 
+          type="text"
+          id="askingPrice"
+          [ngModel]="askingPrice() | number:'1.0-0'"
+          (ngModelChange)="onAskingPriceChange($event)"
+          class="amount-input"
+          placeholder="0">
+      </div>
+    </div>
+
+    <div class="input-group">
+      <label for="downPayment">Down Payment</label>
+      <div class="input-row">
+        <div class="input-container">
+          <input 
+            type="text"
+            id="downPaymentPercent"
+            [ngModel]="downPaymentPercent() | number:'1.2-2'"
+            (ngModelChange)="onDownPaymentPercentChange($event)"
+            class="percent-input"
+            placeholder="0.00">
+          <span class="percent-symbol">%</span>
+        </div>
+        <div class="separator">or</div>
+        <div class="input-container">
+          <span class="currency-symbol">$</span>
+          <input 
+            type="text"
+            id="downPaymentAmount"
+            [ngModel]="downPaymentAmount() | number:'1.0-0'"
+            (ngModelChange)="onDownPaymentAmountChange($event)"
+            class="amount-input"
+            placeholder="0">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Comparison Table -->
+  <div class="comparison-table">
+    <!-- Header Row -->
+    <div class="table-header">
+      <div class="table-cell label"></div>
+      <div class="table-cell">
+        <div class="percent-header">5%</div>
+        <div class="amount-header">{{ comparisonResults()[0].downPaymentAmount | currency:'CAD':'symbol':'1.0-0' }}</div>
+      </div>
+      <div class="table-cell">
+        <div class="percent-header">18%</div>
+        <div class="amount-header">{{ comparisonResults()[1].downPaymentAmount | currency:'CAD':'symbol':'1.0-0' }}</div>
+      </div>
+      <div class="table-cell">
+        <div class="percent-header">19%</div>
+        <div class="amount-header">{{ comparisonResults()[2].downPaymentAmount | currency:'CAD':'symbol':'1.0-0' }}</div>
+      </div>
+      <div class="table-cell">
+        <div class="percent-header">20%</div>
+        <div class="amount-header">{{ comparisonResults()[3].downPaymentAmount | currency:'CAD':'symbol':'1.0-0' }}</div>
+      </div>
+    </div>
+
+    <!-- CMHC Insurance Row -->
+    <div class="table-row">
+      <div class="table-cell label">CMHC insurance</div>
+      <div class="table-cell result" *ngFor="let result of comparisonResults()">
+        <div class="insurance-amount">{{ result.insurancePremium | currency:'CAD':'symbol':'1.0-0' }}</div>
+        <div class="insurance-rate">{{ result.insuranceRate | number:'1.2-2' }}%</div>
+      </div>
+    </div>
+
+    <!-- Total Mortgage Row -->
+    <div class="table-row total-row">
+      <div class="table-cell label">Total mortgage</div>
+      <div class="table-cell result" *ngFor="let result of comparisonResults()">
+        {{ result.totalMortgageAmount | currency:'CAD':'symbol':'1.0-0' }}
+      </div>
+    </div>
+  </div>
+
+  <!-- User's Calculation -->
+  <div class="user-calculation" *ngIf="userResult()">
+    <h3>Your Calculation</h3>
+    <div class="user-result">
+      <div class="result-item">
+        <span class="label">Down Payment:</span>
+        <span class="value">{{ userResult().downPaymentPercent | number:'1.2-2' }}% 
+          ({{ userResult().downPaymentAmount | currency:'CAD':'symbol':'1.0-0' }})</span>
+      </div>
+      <div class="result-item">
+        <span class="label">CMHC Insurance:</span>
+        <span class="value">{{ userResult().insurancePremium | currency:'CAD':'symbol':'1.0-0' }}</span>
+      </div>
+      <div class="result-item total">
+        <span class="label">Total Mortgage:</span>
+        <span class="value">{{ userResult().totalMortgageAmount | currency:'CAD':'symbol':'1.0-0' }}</span>
+      </div>
+    </div>
+    
+    <div class="eligibility-panel" [class]="userResult().eligibility">
+      <div class="eligibility-icon">
+        <span *ngIf="userResult().eligibility === 'insured'">🛡️</span>
+        <span *ngIf="userResult().eligibility === 'conventional'">✓</span>
+        <span *ngIf="userResult().eligibility === 'not_eligible'">✗</span>
+      </div>
+      <div class="eligibility-content">
+        <h4>
+          <span *ngIf="userResult().eligibility === 'insured'">Insured Mortgage</span>
+          <span *ngIf="userResult().eligibility === 'conventional'">Conventional Mortgage</span>
+          <span *ngIf="userResult().eligibility === 'not_eligible'">Not Eligible for Insurance</span>
+        </h4>
+        <p>
+          <span *ngIf="userResult().eligibility === 'insured'">With a down payment of less than 20%, your mortgage requires CMHC insurance.</span>
+          <span *ngIf="userResult().eligibility === 'conventional'">With 20% or more down payment, you have a conventional mortgage and do not pay mortgage default insurance.</span>
+          <span *ngIf="userResult().eligibility === 'not_eligible'">This property does not qualify for CMHC insurance based on the current inputs.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Information -->
+  <div class="info-panel">
+    <h4>Important Information</h4>
+    <ul>
+      <li>CMHC insurance is required for down payments less than 20%</li>
+      <li>Insurance premium is added to your mortgage amount</li>
+      <li>PST (if applicable in MB, QC, ON, SK) must be paid upfront and cannot be financed</li>
+    </ul>
+  </div>
+</div>

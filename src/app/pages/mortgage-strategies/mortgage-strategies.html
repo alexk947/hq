@@ -1,0 +1,246 @@
+<!-- Hero Banner Section -->
+<section class="hero-banner">
+  <img src="1766493030_694a8b660598d.png" 
+       alt="Best Mortgage Strategies" 
+       class="hero-banner-image">
+  <div class="hero-banner-overlay">
+    <div class="hero-banner-content container">
+      <h1 class="hero-banner-title">Best Mortgage Strategies</h1>
+      <div class="hero-banner-subtitle">How Smart Homeowners Reduce Risk, Millions in Interest, and Costly Mistakes</div>
+    </div>
+  </div>
+</section>
+
+<!-- Intro Section -->
+<section class="guide-intro-section">
+  <div class="container">
+    <div class="guide-content">
+      <p>A mortgage is not just a rate. It's a long-term financial contract with risk attached.</p>
+      <p>The best mortgage strategies are not about predicting interest rates or chasing headlines. They are about flexibility, risk control, and decision-making over time — especially in markets like Calgary and across Canada, where job mobility, refinancing, and life changes are common.</p>
+      <p>This guide explains proven mortgage strategies that work in any market — rising rates, falling rates, or flat markets.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Guide Content -->
+<section class="guide-content-section">
+  <div class="container">
+    <div class="guide-content">
+      
+      <!-- Strategy Cards -->
+      <div class="strategy-card" *ngFor="let strategy of strategies">
+        <div class="strategy-number">{{ strategy.number }}</div>
+        <h2 class="strategy-title">{{ strategy.title }}</h2>
+        
+        <!-- Strategy 1: Comparison Box -->
+        <div class="comparison-box" *ngIf="strategy.number === 1">
+          <h4>The Wrong Question vs. The Right Question</h4>
+          <div class="comparison-columns">
+            <div class="comparison-column">
+              <h5>❌ Many homeowners ask:</h5>
+              <p><strong>{{ strategy.content.comparison?.wrong }}</strong></p>
+            </div>
+            <div class="comparison-column">
+              <h5>✅ A smarter question is:</h5>
+              <p><strong>{{ strategy.content.comparison?.right }}</strong></p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Strategy 1: Factors -->
+        <h3 *ngIf="strategy.number === 1">Key flexibility factors that matter more than a slight rate difference:</h3>
+        <ul class="good-list" *ngIf="strategy.number === 1">
+          <li *ngFor="let factor of strategy.content.factors">{{ factor }}</li>
+        </ul>
+        
+        <!-- Strategy 1: Warning -->
+        <div class="warning-box" *ngIf="strategy.number === 1">
+          <h3>Important Warning</h3>
+          <p>{{ strategy.content.warning }}</p>
+        </div>
+        
+        <!-- Strategy 2: Description -->
+        <p *ngIf="strategy.number === 2">{{ strategy.content.description }}</p>
+        
+        <!-- Strategy 2: Highlights -->
+        <div class="strategy-highlight" *ngIf="strategy.number === 2">
+          <h4>⚠️ For many fixed-rate mortgages:</h4>
+          <ul class="bad-list">
+            <li *ngFor="let highlight of strategy.content.highlights">{{ highlight }}</li>
+          </ul>
+        </div>
+        
+        <!-- Strategy 2: Strategy -->
+        <h3 *ngIf="strategy.number === 2">A strong strategy includes:</h3>
+        <ul class="good-list" *ngIf="strategy.number === 2">
+          <li *ngFor="let item of strategy.content.strategy">{{ item }}</li>
+        </ul>
+        
+        <!-- Strategy 3: Description -->
+        <p *ngIf="strategy.number === 3">{{ strategy.content.description }}</p>
+        
+        <!-- Strategy 3: Guidance -->
+        <div class="comparison-box" *ngIf="strategy.number === 3">
+          <h4>General Guidance</h4>
+          <div class="comparison-columns">
+            <div class="comparison-column" *ngFor="let item of strategy.content.guidance">
+              <h5>{{ item.title }}</h5>
+              <p>{{ item.tip }}</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Strategy 3: Life Changes -->
+        <h3 *ngIf="strategy.number === 3">Life changes that often trigger mortgage changes:</h3>
+        <ul class="bad-list" *ngIf="strategy.number === 3">
+          <li *ngFor="let change of strategy.content.changes">{{ change }}</li>
+        </ul>
+        
+        <!-- Strategy 3: Insight -->
+        <div class="success-box" *ngIf="strategy.number === 3">
+          <h3>Key Insight</h3>
+          <p>{{ strategy.content.insight }}</p>
+        </div>
+        
+        <!-- Strategy 4: Description -->
+        <p *ngIf="strategy.number === 4">{{ strategy.content.description }}</p>
+        
+        <!-- Strategy 4: Comparison -->
+        <div class="comparison-box" *ngIf="strategy.number === 4">
+          <div class="comparison-columns">
+            <div class="comparison-column">
+              <h5>Fixed Rates</h5>
+              <ul class="good-list">
+                <li *ngFor="let pro of strategy.content.comparison?.fixed?.pros">{{ pro }}</li>
+              </ul>
+              <ul class="bad-list">
+                <li *ngFor="let con of strategy.content.comparison?.fixed?.cons">{{ con }}</li>
+              </ul>
+            </div>
+            <div class="comparison-column">
+              <h5>Variable Rates</h5>
+              <ul class="good-list">
+                <li *ngFor="let pro of strategy.content.comparison?.variable?.pros">{{ pro }}</li>
+              </ul>
+              <ul class="bad-list">
+                <li *ngFor="let con of strategy.content.comparison?.variable?.cons">{{ con }}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Strategy 4: Reminder -->
+        <div class="success-box" *ngIf="strategy.number === 4">
+          <h3>Remember</h3>
+          <p>{{ strategy.content.reminder }}</p>
+        </div>
+        
+        <!-- Strategy 5: Description -->
+        <p *ngIf="strategy.number === 5">{{ strategy.content.description }}</p>
+        
+        <!-- Strategy 5: Considerations -->
+        <h3 *ngIf="strategy.number === 5">Smart strategies consider:</h3>
+        <ul class="good-list" *ngIf="strategy.number === 5">
+          <li *ngFor="let consideration of strategy.content.considerations">{{ consideration }}</li>
+        </ul>
+        
+        <!-- Strategy 5: Insight -->
+        <div class="strategy-highlight" *ngIf="strategy.number === 5">
+          <h4>💡 Important Insight</h4>
+          <p>{{ strategy.content.insight }}</p>
+        </div>
+        
+      </div>
+
+      <!-- Final Strategy -->
+      <div class="strategy-card">
+        <div class="strategy-number">10</div>
+        <h2 class="strategy-title">{{ finalStrategy.title }}</h2>
+        
+        <div class="callout-box">
+          <h3>{{ finalStrategy.content.heading }}</h3>
+          <p>What stays constant is:</p>
+          <ul class="good-list">
+            <li *ngFor="let constant of finalStrategy.content.constants">{{ constant }}</li>
+          </ul>
+        </div>
+        
+        <div class="success-box">
+          <h3>The Ultimate Strategy</h3>
+          <p>{{ finalStrategy.content.ultimate }}</p>
+        </div>
+      </div>
+
+      <!-- HomeIQ Section -->
+      <div class="guide-section">
+        <h2>What HomeIQ Does Differently</h2>
+        
+        <div class="callout-box">
+          <h3>HomeIQ exists to:</h3>
+          <ul class="good-list">
+            <li>Explain mortgages without selling mortgages</li>
+            <li>Focus on risk, not hype</li>
+            <li>Translate fine print into plain English</li>
+            <li>Help homeowners make decisions they won't regret later</li>
+          </ul>
+          
+          <div class="warning-box">
+            <h4 style="color: var(--danger);">We don't:</h4>
+            <ul class="bad-list">
+              <li>Promote specific lenders</li>
+              <li>Rank professionals</li>
+              <li>Take referral fees</li>
+            </ul>
+          </div>
+          
+          <p><strong>We educate first.</strong></p>
+        </div>
+      </div>
+
+      <!-- Checklist -->
+      <div class="guide-section">
+        <h2>A Simple Mortgage Strategy Checklist</h2>
+        
+        <div class="checklist">
+          <h3>Before choosing or renewing a mortgage, ask yourself:</h3>
+          <ul>
+            <li *ngFor="let question of checklist">{{ question }}</li>
+          </ul>
+          <p class="checklist-conclusion">If you can answer these clearly, you're already ahead of most borrowers.</p>
+        </div>
+      </div>
+
+      <!-- Final Thought -->
+      <div class="guide-section">
+        <h2>Final Thought</h2>
+        
+        <div class="callout-box">
+          <h3>The best mortgage strategy is not about beating the market.</h3>
+          <p>It's about:</p>
+          <div class="strategy-points">
+            <div class="strategy-point">
+              <h4>Reducing regret</h4>
+              <p>Making decisions you can live with</p>
+            </div>
+            <div class="strategy-point">
+              <h4>Controlling risk</h4>
+              <p>Managing what you can control</p>
+            </div>
+            <div class="strategy-point">
+              <h4>Keeping options open</h4>
+              <p>Maintaining flexibility for life changes</p>
+            </div>
+          </div>
+          <p class="strategy-final-note">Rates change. Good strategy lasts.</p>
+        </div>
+      </div>
+
+      <!-- About HomeIQ -->
+      <div class="callout-box final-callout">
+        <h3>About HomeIQ</h3>
+        <p>HomeIQ is an Alberta-based real estate and mortgage intelligence platform focused on transparency, education, and helping homeowners make better long-term decisions — before and after they sign.</p>
+        <a routerLink="/" class="button-primary">Explore Our Resources</a>
+      </div>
+    </div>
+  </div>
+</section>

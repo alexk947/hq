@@ -1,0 +1,200 @@
+/* blog.component.scss */
+:host {
+  display: block;
+}
+
+.blog-section {
+  padding: 60px 0;
+  
+  h2 {
+    font-size: var(--h2-size);
+    font-weight: 600;
+    margin-bottom: 40px;
+    text-align: center;
+  }
+}
+
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  padding: 0 10px;
+}
+
+.blog-card {
+  background: var(--white);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+    
+    .blog-image img {
+      transform: scale(1.05);
+    }
+    
+    .read-more {
+      gap: 8px;
+    }
+  }
+}
+
+.blog-image {
+  height: 160px;
+  overflow: hidden;
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+}
+
+.blog-content {
+  padding: 20px;
+}
+
+.blog-title {
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.blog-excerpt {
+  color: var(--text-secondary);
+  font-size: var(--caption-size);
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.read-more {
+  display: flex;
+  align-items: center;
+  color: var(--primary);
+  font-weight: 500;
+  transition: gap 0.3s ease;
+  gap: 4px;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .blog-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .blog-grid {
+    grid-template-columns: 1fr;
+    padding: 0 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .blog-card {
+    padding: 20px;
+  }
+  
+  .blog-image {
+    height: 140px;
+  }
+}
+
+/* --- CAROUSEL LAYOUT --- */
+.carousel-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.carousel-track {
+  overflow: hidden;
+  width: 100%;
+}
+
+.carousel-inner {
+  display: flex;
+  transition: transform 0.6s ease;
+  will-change: transform;
+}
+
+.carousel-slide {
+  min-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Arrows */
+.carousel-arrow {
+  background: white;
+  border: 1px solid var(--border);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  font-size: 28px;
+  cursor: pointer;
+  transition: 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 2;
+  flex-shrink: 0;
+
+  &:hover {
+    background: var(--primary-light);
+  }
+}
+
+.carousel-arrow.left {
+  margin-right: 16px;
+}
+
+.carousel-arrow.right {
+  margin-left: 16px;
+}
+
+/* Dots */
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+  gap: 8px;
+
+  span {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ddd;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: #ccc;
+    }
+
+    &.active {
+      background: var(--primary);
+      transform: scale(1.2);
+    }
+  }
+}
+
+/* Hide arrows on mobile */
+@media (max-width: 768px) {
+  .carousel-arrow {
+    display: none;
+  }
+  
+  .carousel-wrapper {
+    padding: 0 20px;
+  }
+  
+  .carousel-track {
+    padding: 0;
+  }
+}

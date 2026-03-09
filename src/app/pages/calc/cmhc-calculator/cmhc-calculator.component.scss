@@ -1,0 +1,368 @@
+// cmhc-calculator.component.scss
+.calculator-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #333;
+}
+
+h2 {
+  color: #1a365d;
+  margin-bottom: 0.5rem;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.description {
+  color: #4a5568;
+  margin-bottom: 2rem;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* Input Section */
+.input-section {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 32px;
+  display: flex;
+  gap: 48px;
+}
+
+.input-group {
+  flex: 1;
+}
+
+.input-group label {
+  display: block;
+  font-weight: 600;
+  color: #4a5568;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.input-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.input-container {
+  position: relative;
+  flex: 1;
+}
+
+.input-container .currency-symbol {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #718096;
+  font-weight: 500;
+  pointer-events: none;
+}
+
+.input-container .percent-symbol {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #718096;
+  font-weight: 500;
+  pointer-events: none;
+}
+
+.amount-input, .percent-input {
+  width: 100%;
+  padding: 10px 12px 10px 30px;
+  border: 2px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 16px;
+  text-align: right;
+  background: white;
+  transition: border-color 0.2s;
+  font-family: 'Courier New', monospace;
+  font-weight: 500;
+}
+
+.percent-input {
+  padding: 10px 30px 10px 12px;
+}
+
+.amount-input:focus, .percent-input:focus {
+  outline: none;
+  border-color: #3182ce;
+  box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.1);
+}
+
+.separator {
+  color: #a0aec0;
+  font-size: 14px;
+}
+
+/* Comparison Table */
+.comparison-table {
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin-bottom: 32px;
+}
+
+.table-header {
+  display: flex;
+  background: #2d3748;
+  color: white;
+  padding: 20px;
+}
+
+.table-row {
+  display: flex;
+  align-items: center;
+  min-height: 80px;
+  padding: 0 20px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.table-row:last-child {
+  border-bottom: none;
+}
+
+.total-row {
+  background-color: #ebf8ff;
+  font-weight: 600;
+}
+
+.table-cell {
+  flex: 1;
+  padding: 12px;
+  text-align: center;
+}
+
+.table-cell.label {
+  flex: 0 0 200px;
+  text-align: left;
+  font-weight: 600;
+  color: #2d3748;
+  font-size: 16px;
+}
+
+.table-cell.result {
+  font-family: 'Courier New', monospace;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.table-header .table-cell {
+  padding: 8px 12px;
+}
+
+.percent-header {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.amount-header {
+  font-size: 14px;
+  opacity: 0.9;
+  font-weight: 500;
+}
+
+.insurance-amount {
+  font-size: 18px;
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.insurance-rate {
+  font-size: 14px;
+  color: #718096;
+  margin-top: 4px;
+}
+
+/* User Calculation */
+.user-calculation {
+  background: #f7fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.user-calculation h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #2d3748;
+  font-size: 20px;
+}
+
+.user-result {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.result-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  background: white;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+}
+
+.result-item.total {
+  background: #ebf8ff;
+  border-color: #bee3f8;
+  font-weight: 600;
+}
+
+.result-item .label {
+  font-weight: 500;
+  color: #4a5568;
+}
+
+.result-item .value {
+  font-family: 'Courier New', monospace;
+  font-weight: 600;
+  font-size: 16px;
+  color: #2d3748;
+}
+
+.result-item.total .value {
+  font-size: 18px;
+  color: #2b6cb0;
+}
+
+/* Eligibility Panel */
+.eligibility-panel {
+  display: flex;
+  align-items: flex-start;
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.eligibility-panel.insured {
+  background: #f0f9ff;
+  border: 1px solid #bee3f8;
+}
+
+.eligibility-panel.conventional {
+  background: #f0fff4;
+  border: 1px solid #c6f6d5;
+}
+
+.eligibility-panel.not_eligible {
+  background: #fff5f5;
+  border: 1px solid #fed7d7;
+}
+
+.eligibility-icon {
+  font-size: 24px;
+  margin-right: 16px;
+  flex-shrink: 0;
+}
+
+.eligibility-panel.insured .eligibility-icon {
+  color: #3182ce;
+}
+
+.eligibility-panel.conventional .eligibility-icon {
+  color: #38a169;
+}
+
+.eligibility-panel.not_eligible .eligibility-icon {
+  color: #e53e3e;
+}
+
+.eligibility-content h4 {
+  margin: 0 0 8px 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.eligibility-panel.insured .eligibility-content h4 {
+  color: #2b6cb0;
+}
+
+.eligibility-panel.conventional .eligibility-content h4 {
+  color: #2f855a;
+}
+
+.eligibility-panel.not_eligible .eligibility-content h4 {
+  color: #c53030;
+}
+
+.eligibility-content p {
+  margin: 0;
+  color: #4a5568;
+  line-height: 1.5;
+}
+
+/* Info Panel */
+.info-panel {
+  background: #fffaf0;
+  border-left: 4px solid #f6ad55;
+  border-radius: 4px;
+  padding: 16px;
+}
+
+.info-panel h4 {
+  margin-top: 0;
+  color: #c05621;
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+
+.info-panel ul {
+  padding-left: 20px;
+  color: #744210;
+  margin-bottom: 12px;
+}
+
+.info-panel li {
+  margin-bottom: 6px;
+  line-height: 1.5;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .calculator-container {
+    padding: 0 16px;
+  }
+  
+  .input-section {
+    flex-direction: column;
+    gap: 24px;
+  }
+  
+  .input-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  
+  .separator {
+    text-align: center;
+  }
+  
+  .comparison-table {
+    overflow-x: auto;
+  }
+  
+  .table-header, .table-row {
+    min-width: 700px;
+  }
+  
+  .user-result .result-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}

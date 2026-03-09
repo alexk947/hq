@@ -1,0 +1,126 @@
+<!-- Hero Banner Section -->
+<section class="hero-banner">
+  <img src="property_managers.png" 
+       alt="Top Property Management Companies in Calgary" 
+       class="hero-banner-image">
+  <div class="hero-banner-overlay">
+    <div class="hero-banner-content container">
+      <h1 class="hero-banner-title">Property Managers</h1>
+      <div class="hero-banner-subtitle">Top 3 Property Management Companies in Calgary – Trusted Partners for Homeowners & Investors</div>
+    </div>
+  </div>
+</section>
+
+<!-- Intro Section -->
+<section class="intro-section">
+  <div class="container">
+    <h1>Top 3 Property Management Companies in Calgary</h1>
+    <h2>Trusted Partners for Homeowners & Investors</h2>
+    <p>Choosing the right property management company in Calgary can significantly impact your cash flow, tenant quality, and long-term property performance. A strong management team protects your investment, handles day-to-day operations, reduces vacancies, and ensures compliance with Alberta tenancy laws.</p>
+    <p>We highlight Calgary property managers with strong reputations, transparent processes, excellent communication, and proven results for both homeowners and investors.</p>
+  </div>
+</section>
+
+<!-- Important Note Section -->
+<section class="ready-section">
+  <div class="container">
+    <div class="important-note">
+      <strong>Important:</strong>
+      <p>Our rankings are fully independent, based on research, evaluation, and real investor feedback.</p>
+      <p>We do not receive commissions or compensation from any property management company listed here.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Top Property Managers Section -->
+<section class="top-firms-section">
+  <div class="container">
+    <h3>Our Top Property Management Company Picks</h3>
+    
+    <div class="intro-content">
+      <p>Each property management company below has been carefully selected based on their reliability, tenant selection processes, and proven ability to maximize returns for property owners in Calgary's rental market.</p>
+    </div>
+    
+    <div class="firm-cards-grid">
+      <!-- Company Cards -->
+      <div class="firm-card" *ngFor="let company of companies; let i = index">
+        <div class="firm-header">
+          <div class="firm-name">{{company.name}}</div>
+          <div class="firm-title">{{company.title}}</div>
+        </div>
+        
+        <div class="firm-contact">
+          <div class="contact-line">
+            <strong>Website:</strong> 
+            <a [href]="company.website" target="_blank" rel="noopener noreferrer">{{company.website}}</a>
+          </div>
+          <div class="contact-line">
+            <strong>Phone:</strong> {{company.phone}}
+          </div>
+          <div class="contact-line">
+            <strong>Location:</strong> {{company.location}}
+          </div>
+        </div>
+        
+        <div class="firm-content">
+          <div class="firm-recommendation">
+            <h4>Why We Recommend {{getCompanyShortName(company.name)}}</h4>
+            <p>{{company.recommendation}}</p>
+            
+            <div class="services-list" *ngIf="company.services.length">
+              <h5>Services Offered:</h5>
+              <ul>
+                <li *ngFor="let service of company.services">{{service}}</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="firm-best-for" *ngIf="company.bestFor.length">
+            <h4>Best For:</h4>
+            <ul>
+              <li *ngFor="let item of company.bestFor">{{item}}</li>
+            </ul>
+          </div>
+        </div>
+        
+        <!-- Visual divider between cards -->
+        <div class="card-divider" *ngIf="i < companies.length - 1"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why Managers Matter Section -->
+<section class="why-section">
+  <div class="container">
+    <h2>Why the Right Property Manager Matters</h2>
+    <p>A reliable property manager supports stable cash flow, protects the rental asset, and contributes to long-term growth. In Calgary, where demand fluctuates significantly between the high-activity months of April to October and the quieter winter season, a company's grasp of timing can have a measurable effect on vacancy outcomes and rental rates.</p>
+    
+    <div class="benefits-grid">
+      <div class="benefit-item" *ngFor="let benefit of managerBenefits">
+        <h3>{{benefit}}</h3>
+        <p>{{getBenefitDescription(benefit)}}</p>
+      </div>
+    </div>
+    
+    <div class="warning-section">
+      <h3>⚠️ The Risk of Poor Property Management</h3>
+      <p>Mismanaged properties often experience longer vacancies, higher turnover, and preventable repair costs — factors that can erode annual returns even in otherwise strong neighbourhoods.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Ready to Get Started Section -->
+<section class="ready-section">
+  <div class="container">
+    <h2>🚀 Ready to Get Started?</h2>
+    <p>Reach out to any of the trusted property managers above—our recommendations are fully independent.</p>
+    <p class="highlighted-text">Once you begin the process, return to our site to evaluate the investment side using our free tools:</p>
+  </div>
+</section>
+
+<!-- Tools Section -->
+<app-tools-section   
+  title="🔧 Popular Tools for Homeowners & Investors"
+  description="Use these tools today to make smarter, more confident real-estate decisions—before committing to a tenant or management contract.">
+</app-tools-section>
